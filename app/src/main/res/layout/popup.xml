@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/popupLayout"
+    android:background="#ffffff">
+
+    <!--<TextView-->
+        <!--android:id="@+id/driver_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:textSize="30dp"-->
+        <!--android:text="Driver Name" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/driver_id"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/driver_name"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:text="ID"-->
+        <!--android:textSize="30dp"/>-->
+
+    <TextView
+        android:id="@+id/selectBus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Select Bus"
+        android:textSize="30dp"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/bus_numbers"
+        android:textSize="30dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectBus"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+    </AutoCompleteTextView>
+
+    <Button
+        android:id="@+id/beginInspection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="30dp"
+        android:text="Begin Inspection" />
+</RelativeLayout>

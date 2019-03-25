@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "935078332184",
+    "firebase_url": "https://transitapp-d5956.firebaseio.com",
+    "project_id": "transitapp-d5956",
+    "storage_bucket": "transitapp-d5956.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935078332184:android:2c1371f02a8628e0",
+        "android_client_info": {
+          "package_name": "com.example.transitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935078332184-9h484l7059v708qg656b05mipp6tsnqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.transitapp",
+            "certificate_hash": "4384e72d1a35899c2a65e3aa80bd528a2bf95c50"
+          }
+        },
+        {
+          "client_id": "935078332184-octoapdmhfghq65iko5i2je3jcirjc9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1kIHe4frfTJ5vfoFjKdf9LPJqHp9Krog"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935078332184-octoapdmhfghq65iko5i2je3jcirjc9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
