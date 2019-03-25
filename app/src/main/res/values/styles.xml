@@ -7,11 +7,26 @@
         <item name="colorPrimaryDark">#FF9B671B</item>
         <item name="colorAccent">#000000</item>
     </style>
+
     <style name="FirebaseUI.TextInputEditText" parent="AppTheme">
         <item name="android:windowBackground">@drawable/background</item>
         <item name="android:textSize">30dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Dialog" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 
 </resources>

@@ -21,8 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DriverDashboard" />
-        <activity android:name=".FirebaseUIActivity">
-        </activity>
+        <activity android:name=".FirebaseUIActivity"></activity>
     </application>
 
 </manifest>

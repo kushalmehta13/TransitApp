@@ -2,7 +2,9 @@ package com.example.transitapp;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -28,11 +31,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
     private Button signOut;
     private Intent login;
+    private Intent preInspectionIntent;
     private Button preInspection;
     private Button beginInspection;
     private RelativeLayout layout;
@@ -72,32 +78,53 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
             });
                     break;
             case R.id.pre_insp_check:
-                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                popupView = inflater.inflate(R.layout.popup, null);
-                boolean focusable = true;
-                popupWindow = new PopupWindow(popupView, 800, 800, focusable);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    popupWindow.setElevation(20);
-                }
-                popupWindow.showAtLocation(parent, Gravity.CENTER, 0,0 );
-
-                bus_num = popupView.findViewById(R.id.bus_numbers);
+//                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+//                popupView = inflater.inflate(R.layout.popup, null);
+//                boolean focusable = true;
+//                popupWindow = new PopupWindow(popupView, 800, 800, focusable);
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    popupWindow.setElevation(20);
+//                }
+//                popupWindow.showAtLocation(parent, Gravity.CENTER, 0,0 );
+//
+//                bus_num = popupView.findViewById(R.id.bus_numbers);
+//                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//                        R.array.planets_array, R.layout.spinner_item);
+//                adapter.setDropDownViewResource(R.layout.spinner_item);
+//                bus_num.setAdapter(adapter);
+//                bus_num.setHint("Bus number");
+//
+//                beginInspection = popupView.findViewById(R.id.beginInspection);
+//                beginInspection.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        // TODO: Create new intent for pre inspection and start activity
+////                        preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
+////                        startActivity(preInspectionIntent);
+//                        // Place holder for now
+//                        popupWindow.dismiss();
+//                    }
+//                });
+                final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
+                dialog.setContentView(R.layout.busn_number_dialog);
+                dialog.setTitle("Select Bus Number");
+                ImageView image = dialog.findViewById(R.id.busIcon);
+                image.setImageResource(R.drawable.ic_bus_black_36dp);
+                bus_num = dialog.findViewById(R.id.bus_numbers);
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                         R.array.planets_array, R.layout.spinner_item);
                 adapter.setDropDownViewResource(R.layout.spinner_item);
                 bus_num.setAdapter(adapter);
                 bus_num.setHint("Bus number");
-
-                beginInspection = popupView.findViewById(R.id.beginInspection);
+                beginInspection = dialog.findViewById(R.id.beginInspection);
                 beginInspection.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // TODO: Create new intent for pre inspection and start activity
-
-                        // Place holder for now
-                        popupWindow.dismiss();
+                        dialog.dismiss();
                     }
                 });
+                dialog.show();
+
                     break;
         }
 
