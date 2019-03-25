@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/busIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bus_numbers"
+        android:layout_alignBottom="@+id/bus_numbers"
+        android:layout_toStartOf="@+id/bus_numbers"
+        android:layout_toLeftOf="@+id/bus_numbers"
+        android:layout_centerVertical="true" />
+    <AutoCompleteTextView
+        android:completionThreshold="1"
+        android:id="@+id/bus_numbers"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:inputType="number"
+        android:textSize="30dp"/>
+    <Button
+        android:id="@+id/beginInspection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/bus_numbers"
+        android:layout_marginTop="100dp"
+        android:textSize="30dp"
+        android:text="Begin Inspection" />
+</RelativeLayout>
