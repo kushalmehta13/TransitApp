@@ -78,33 +78,6 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
             });
                     break;
             case R.id.pre_insp_check:
-//                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//                popupView = inflater.inflate(R.layout.popup, null);
-//                boolean focusable = true;
-//                popupWindow = new PopupWindow(popupView, 800, 800, focusable);
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                    popupWindow.setElevation(20);
-//                }
-//                popupWindow.showAtLocation(parent, Gravity.CENTER, 0,0 );
-//
-//                bus_num = popupView.findViewById(R.id.bus_numbers);
-//                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//                        R.array.planets_array, R.layout.spinner_item);
-//                adapter.setDropDownViewResource(R.layout.spinner_item);
-//                bus_num.setAdapter(adapter);
-//                bus_num.setHint("Bus number");
-//
-//                beginInspection = popupView.findViewById(R.id.beginInspection);
-//                beginInspection.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // TODO: Create new intent for pre inspection and start activity
-////                        preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
-////                        startActivity(preInspectionIntent);
-//                        // Place holder for now
-//                        popupWindow.dismiss();
-//                    }
-//                });
                 final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
                 dialog.setContentView(R.layout.busn_number_dialog);
                 dialog.setTitle("Select Bus Number");
