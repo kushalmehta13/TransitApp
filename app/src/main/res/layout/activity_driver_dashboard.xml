@@ -1,87 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/driverDashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_map"
-    tools:context=".DriverDashboard"
-    android:id="@+id/driverDashboard">
+    android:orientation="vertical"
+    tools:context=".DriverDashboard">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="90"
+        android:orientation="horizontal">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7">
+
+            <ImageView
+                android:id="@+id/dashboard_tab_imgView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/dashboard_tab" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10" />
+
+                <TextView
+                    android:id="@+id/dashboardtxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/faster_one"
+                    android:gravity="center|start"
+                    android:lines="2"
+                    android:text="Driver\nDashboard"
+                    android:textColor="#000000"
+                    app:autoSizeMaxTextSize="80sp"
+                    app:autoSizeMinTextSize="5sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="@+id/dashboard_tab_imgView"
+                    app:layout_constraintEnd_toEndOf="@+id/dashboard_tab_imgView"
+                    app:layout_constraintStart_toStartOf="@+id/dashboard_tab_imgView"
+                    app:layout_constraintTop_toTopOf="@+id/dashboard_tab_imgView" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10" />
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/driver_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1.3"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="Welcome, Driver Name"
+            android:textSize="38sp"
+            app:autoSizeMaxTextSize="40sp"
+            app:autoSizeMinTextSize="5sp"
+            app:autoSizeStepGranularity="14dp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@+id/dashboardtxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dashboardtxt"
+            app:layout_constraintTop_toTopOf="@+id/dashboardtxt" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/dashboardtxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Driver Dashboard"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:textSize="50dp"
-        android:textColor="#000000"
-        android:layout_marginTop="30dp"/>
+        android:id="@+id/layout_holder1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="100" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="100">
+
+        <ImageView
+            android:id="@+id/pre_insp_imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/preins_btn_img" />
+
+        <Button
+            android:id="@+id/pre_insp_check_Btn"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:autoText="false"
+            android:background="@color/fui_transparent"
+            android:drawableStart="@drawable/transparent_square"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:maxLines="2"
+            android:shadowRadius="@android:integer/config_shortAnimTime"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            android:textColor="@color/browser_actions_title_color"
+            android:textSize="10sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/pre_insp_imageView"
+            app:layout_constraintEnd_toEndOf="@+id/pre_insp_imageView"
+            app:layout_constraintStart_toStartOf="@+id/pre_insp_imageView"
+            app:layout_constraintTop_toTopOf="@+id/pre_insp_imageView" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/driver_name"
-        android:text="Driver Name"
-        android:layout_below="@id/dashboardtxt"
-        android:layout_centerHorizontal="true"
-        android:textSize="30dp"/>
-    <Button
-        android:id="@+id/pre_insp_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pre-Inspection Check"
-        android:layout_marginTop="40dp"
-        android:textSize="40dp"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/dashboardtxt"/>
+        android:id="@+id/layout_holder2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="105" />
 
-    <Button
-        android:id="@+id/edit_pre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/pre_insp_check"
-        android:layout_alignBottom="@+id/pre_insp_check"
-        android:layout_toEndOf="@+id/pre_insp_check"
-        android:layout_toRightOf="@+id/pre_insp_check"
-        android:background="@android:drawable/ic_menu_edit" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="85">
 
-    <Button
-        android:id="@+id/start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Start Trip"
-        android:textSize="70dp" />
+        <ImageView
+            android:id="@+id/start_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/start_trip_button" />
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:autoText="false"
+            android:background="@color/fui_transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/start_imageView"
+            app:layout_constraintEnd_toEndOf="@+id/start_imageView"
+            app:layout_constraintStart_toStartOf="@+id/start_imageView"
+            app:layout_constraintTop_toTopOf="@+id/start_imageView" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/layout_holder3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="105" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="100">
+
+        <ImageView
+            android:id="@+id/post_insp_imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/postins_btn_img" />
+
+        <Button
+            android:id="@+id/post_insp_check_btn"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:autoText="false"
+            android:background="@color/fui_transparent"
+            android:drawableStart="@drawable/transparent_square"
+            android:foregroundGravity="center"
+            android:gravity="center|left"
+            android:maxLines="2"
+            android:shadowRadius="@android:integer/config_shortAnimTime"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            android:textColor="@color/browser_actions_title_color"
+            android:textSize="50sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/post_insp_imageView"
+            app:layout_constraintEnd_toEndOf="@+id/post_insp_imageView"
+            app:layout_constraintStart_toStartOf="@+id/post_insp_imageView"
+            app:layout_constraintTop_toTopOf="@+id/post_insp_imageView" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/layout_holder4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="90" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="100">
+
+        <ImageView
+            android:id="@+id/signout_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/signout_btn_img" />
+
+        <Button
+            android:id="@+id/signOut"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/fui_transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/signout_imageView"
+            app:layout_constraintEnd_toEndOf="@+id/signout_imageView"
+            app:layout_constraintStart_toStartOf="@+id/signout_imageView"
+            app:layout_constraintTop_toTopOf="@+id/signout_imageView" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/layout_holder5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="107" />
 
 
-    <Button
-        android:id="@+id/edit_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/post_insp_check"
-        android:layout_alignBottom="@+id/post_insp_check"
-        android:layout_toEndOf="@+id/post_insp_check"
-        android:layout_toRightOf="@+id/post_insp_check"
-        android:background="@android:drawable/ic_menu_edit" />
-
-    <Button
-        android:id="@+id/post_insp_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Post-Inspection Check"
-        android:textSize="40dp"
-        android:layout_above="@id/signOut"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"/>
-    <Button
-        android:id="@+id/signOut"
-        android:textSize="30dp"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="30dp"
-        android:text="Sign Out" />
-</RelativeLayout>
+</LinearLayout>
