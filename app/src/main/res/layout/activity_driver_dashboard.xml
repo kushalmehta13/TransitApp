@@ -132,21 +132,16 @@
             android:layout_height="0dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:autoText="false"
             android:background="@color/fui_transparent"
-            android:drawableStart="@drawable/transparent_square"
             android:foregroundGravity="center"
             android:gravity="center"
             android:maxLines="2"
             android:shadowRadius="@android:integer/config_shortAnimTime"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-            android:textColor="@color/browser_actions_title_color"
             android:textSize="10sp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/pre_insp_imageView"
@@ -171,6 +166,7 @@
             android:id="@+id/start_imageView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +174,7 @@
             app:srcCompat="@drawable/start_trip_button" />
 
         <Button
-            android:id="@+id/start"
+            android:id="@+id/start_trip_Btn"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerHorizontal="true"
@@ -220,7 +216,7 @@
             app:srcCompat="@drawable/postins_btn_img" />
 
         <Button
-            android:id="@+id/post_insp_check_btn"
+            android:id="@+id/post_insp_check_Btn"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -275,7 +271,7 @@
             app:srcCompat="@drawable/signout_btn_img" />
 
         <Button
-            android:id="@+id/signOut"
+            android:id="@+id/signOut_Btn"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="0dp"

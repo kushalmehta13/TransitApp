@@ -17,6 +17,13 @@ public class splash extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
         setContentView(R.layout.activity_splash);
         videoView = (VideoView) findViewById(R.id.videoView);
 
@@ -29,8 +36,12 @@ public class splash extends AppCompatActivity {
             }
         });
 
+
+
         videoView.start();
+
     }
+
 
     private void startNextActivity() {
         if (isFinishing())

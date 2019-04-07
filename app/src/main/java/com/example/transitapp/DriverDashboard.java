@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -22,18 +24,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
-    private Button signOut;
     private Intent login;
     private Intent preInspectionIntent;
-    private Button preInspection;
-    private Button beginInspection;
-    private RelativeLayout layout;
-    private RelativeLayout mainLayout;
+    private RelativeLayout layout, mainLayout;
     private PopupWindow popUp;
     private AutoCompleteTextView bus_num;
     private TextView driverName;
     private View parent, popupView;
     private PopupWindow popupWindow;
+
+    private Button preInspection, startTrip, postInspection, signOut, beginInspection ;
+    private ImageView pre_ins_btn_img, post_ins_btn_img, start_trip_btn_img, signout_btn_img;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,30 +45,56 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
 
         login = new Intent(this, FirebaseUIActivity.class);
-        signOut = findViewById(R.id.signOut);
+
         preInspection = findViewById(R.id.pre_insp_check_Btn);
-        signOut.setOnClickListener(this);
+        startTrip = findViewById(R.id.start_trip_Btn);
+        postInspection = findViewById(R.id.post_insp_check_Btn);
+        signOut = findViewById(R.id.signOut_Btn);
+
         preInspection.setOnClickListener(this);
+        startTrip.setOnClickListener(this);
+        postInspection.setOnClickListener(this);
+        signOut.setOnClickListener(this);
+
+
+
         driverName = findViewById(R.id.driver_name);
         parent = findViewById(R.id.driverDashboard);
-
+        pre_ins_btn_img = findViewById(R.id.pre_insp_imageView);
+        post_ins_btn_img = findViewById(R.id.post_insp_imageView);
+        start_trip_btn_img = findViewById(R.id.start_imageView);
+        signout_btn_img = findViewById(R.id.signout_imageView);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         driverName.setText("Hello, " + user.getDisplayName());
+
+
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        driverName.startAnimation(myAnim);
+        pre_ins_btn_img.startAnimation(myAnim);
+        start_trip_btn_img.startAnimation(myAnim);
+        post_ins_btn_img.startAnimation(myAnim);
+        signout_btn_img.startAnimation(myAnim);
+
+
     }
 
     @Override
     public void onClick(View v) {
+
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+
         switch (v.getId()){
-            case R.id.signOut: AuthUI.getInstance().signOut(getApplicationContext()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    startActivity(login);
-                    finish();
-                }
-            });
-                    break;
+
+
             case R.id.pre_insp_check_Btn:
+
+                // Use bounce interpolator with amplitude 0.2 and frequency 20
+                myAnim.setInterpolator(interpolator);
+                pre_ins_btn_img.startAnimation(myAnim);
+
+
                 final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
                 dialog.setContentView(R.layout.busn_number_dialog);
                 dialog.setTitle("Select Bus Number");
@@ -85,7 +115,40 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 });
                 dialog.show();
 
-                    break;
+                break;
+
+            case R.id.start_trip_Btn:
+
+                // Use bounce interpolator with amplitude 0.2 and frequency 20
+                myAnim.setInterpolator(interpolator);
+                start_trip_btn_img.startAnimation(myAnim);
+
+                break;
+
+            case R.id.post_insp_check_Btn:
+
+                // Use bounce interpolator with amplitude 0.2 and frequency 20
+                myAnim.setInterpolator(interpolator);
+                post_ins_btn_img.startAnimation(myAnim);
+
+                break;
+
+            case R.id.signOut_Btn:
+                // Use bounce interpolator with amplitude 0.2 and frequency 20
+                myAnim.setInterpolator(interpolator);
+                signout_btn_img.startAnimation(myAnim);
+                AuthUI.getInstance().signOut(getApplicationContext()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    startActivity(login);
+                    finish();
+                }
+            });
+                break;
+
+
+
+
         }
 
     }
