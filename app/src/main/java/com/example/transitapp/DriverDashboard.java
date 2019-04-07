@@ -24,6 +24,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
+<<<<<<< HEAD
+=======
+    //This is testing comment
+    //This is testing comment2
+    private Button signOut;
+>>>>>>> a98c46a754b70daa29599a38ab7de87867d840a5
     private Intent login;
     private Intent preInspectionIntent;
     private RelativeLayout layout, mainLayout;
