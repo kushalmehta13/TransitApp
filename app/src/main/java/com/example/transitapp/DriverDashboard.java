@@ -93,6 +93,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 beginInspection.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
+                        startActivity(preInspectionIntent);
                         dialog.dismiss();
                     }
                 });

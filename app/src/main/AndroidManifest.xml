@@ -13,6 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".PreInspectionActivity"
+            android:label="@string/title_activity_pre_inspection"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
         <activity android:name=".splash">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DriverDashboard" />
-        <activity android:name=".FirebaseUIActivity"></activity>
+        <activity android:name=".FirebaseUIActivity" />
     </application>
 
 </manifest>
