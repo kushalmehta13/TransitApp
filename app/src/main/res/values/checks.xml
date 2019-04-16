@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="engineChecks">
+        <item>Fuel Level</item>
+        <item>Oil Level / Pressure</item>
+        <item>Transmission Fluid Level</item>
+        <item>Power Steering Fluid Level</item>
+        <item>Brake Fluid Level</item>
+        <item>Battery Charge</item>
+        <item>Windshield Wiper Fluid</item>
+        <item>Radiator Fluid Level</item>
+        <item>Fluids Leaking under Bus</item>
+        <item>Engine Warning Lights Belts (Altinator, Drive and Compressor)</item>
+        <item>Def Fluid</item>
+    </array>
+    <array name="interiorChecks">
+        <item>Mirrors</item>
+        <item>Windshield Wipers</item>
+        <item>Horn</item>
+        <item>Parking Brake</item>
+        <item>Fans/Defroster</item>
+        <item>Heater/Air Conditioning</item>
+        <item>Radio Equipment</item>
+        <item>Cellphone / WiFi</item>
+        <item>Passenger Door Operation</item>
+        <item>Interior Lights</item>
+        <item>Driver Seat and Belts</item>
+        <item>Passenger Seat</item>
+        <item>Wheelchai Lift/Interlock</item>
+        <item>First Aid Kit</item>
+        <item>Fire Extinguisher</item>
+        <item>Other Emergency Gear</item>
+        <item>Destination Signs</item>
+        <item>Card Reader</item>
+        <item>Windows Clean</item>
+        <item>Interior Clean</item>
+        <item>Waste Receptacle Emptied</item>
+        <item>Wheelchair Cycling</item>
+    </array>
+    <array name="exteriorChecks">
+        <item>HeadLights - Hi/Low</item>
+        <item>Fog Lamps/hazard Lamps</item>
+        <item>Windshield Condition</item>
+        <item>Directional Signals Front</item>
+        <item>Directional Signals Rear</item>
+        <item>Tail Lights/Running Lights</item>
+        <item>Brake Lights/Back-up Lights</item>
+        <item>Tire Condition/Air Pressure</item>
+        <item>Tire Tread Depth</item>
+        <item>Lug Nuts Tight</item>
+        <item>Emergency Windows Seal Tight</item>
+        <item>Luggage Storage Doors and Engine Compartment Panels OK</item>
+        <item>Exterior clean</item>
+        <item>Body Condition/Scratches/Dings/Dents</item>
+        <item>Bike Rack</item>
+    </array>
+</resources>
