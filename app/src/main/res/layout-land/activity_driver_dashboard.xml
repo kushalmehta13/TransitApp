@@ -123,141 +123,155 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="100" />
+            android:layout_weight="110" />
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="100">
+            android:layout_weight="70"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/pre_insp_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:adjustViewBounds="true"
-                android:cropToPadding="true"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/preins_btn_img" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="110" />
 
-            <Button
-                android:id="@+id/pre_insp_check_Btn"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@color/fui_transparent"
-                android:foregroundGravity="center"
-                android:gravity="center"
-                android:maxLines="2"
-                android:shadowRadius="@android:integer/config_shortAnimTime"
-                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-                android:textSize="10sp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/pre_insp_imageView"
-                app:layout_constraintEnd_toEndOf="@+id/pre_insp_imageView"
-                app:layout_constraintStart_toStartOf="@+id/pre_insp_imageView"
-                app:layout_constraintTop_toTopOf="@+id/pre_insp_imageView" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="100">
 
-        </android.support.constraint.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/pre_insp_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/pre_ins_btn_img_land" />
+
+                <Button
+                    android:id="@+id/pre_insp_check_Btn"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/fui_transparent"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:shadowRadius="@android:integer/config_shortAnimTime"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+                    android:textSize="10sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/pre_insp_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/pre_insp_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/pre_insp_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/pre_insp_imageView" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="110" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="90">
+
+                <ImageView
+                    android:id="@+id/start_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/start_trip_button" />
+
+                <Button
+                    android:id="@+id/start_trip_Btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:autoText="false"
+                    android:background="@color/fui_transparent"
+                    app:layout_constraintBottom_toBottomOf="@+id/start_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/start_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/start_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/start_imageView" />
+            </android.support.constraint.ConstraintLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="110" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="100">
+
+                <ImageView
+                    android:id="@+id/post_insp_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/post_ins_btn_img_land" />
+
+                <Button
+                    android:id="@+id/post_insp_check_Btn"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:autoText="false"
+                    android:background="@color/fui_transparent"
+                    android:drawableStart="@drawable/transparent_square"
+                    android:foregroundGravity="center"
+                    android:gravity="center|left"
+                    android:maxLines="2"
+                    android:shadowRadius="@android:integer/config_shortAnimTime"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+                    android:textColor="@color/browser_actions_title_color"
+                    android:textSize="50sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/post_insp_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/post_insp_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/post_insp_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/post_insp_imageView" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="110" />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="105" />
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="85">
-
-            <ImageView
-                android:id="@+id/start_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/start_trip_button" />
-
-            <Button
-                android:id="@+id/start_trip_Btn"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:autoText="false"
-                android:background="@color/fui_transparent"
-                app:layout_constraintBottom_toBottomOf="@+id/start_imageView"
-                app:layout_constraintEnd_toEndOf="@+id/start_imageView"
-                app:layout_constraintStart_toStartOf="@+id/start_imageView"
-                app:layout_constraintTop_toTopOf="@+id/start_imageView" />
-        </android.support.constraint.ConstraintLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="105" />
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="100">
-
-            <ImageView
-                android:id="@+id/post_insp_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:adjustViewBounds="true"
-                android:cropToPadding="true"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/postins_btn_img" />
-
-            <Button
-                android:id="@+id/post_insp_check_Btn"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:autoText="false"
-                android:background="@color/fui_transparent"
-                android:drawableStart="@drawable/transparent_square"
-                android:foregroundGravity="center"
-                android:gravity="center|left"
-                android:maxLines="2"
-                android:shadowRadius="@android:integer/config_shortAnimTime"
-                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-                android:textColor="@color/browser_actions_title_color"
-                android:textSize="50sp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/post_insp_imageView"
-                app:layout_constraintEnd_toEndOf="@+id/post_insp_imageView"
-                app:layout_constraintStart_toStartOf="@+id/post_insp_imageView"
-                app:layout_constraintTop_toTopOf="@+id/post_insp_imageView" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="100" />
+            android:layout_weight="110" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -273,6 +287,7 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/signout_btn_img" />
@@ -293,7 +308,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="107" />
+            android:layout_weight="115" />
     </LinearLayout>
 
 

@@ -13,9 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Enroute_Dashboard"></activity>
         <activity android:name=".splash">
-
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
@@ -23,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DriverDashboard" />
-        <activity android:name=".FirebaseUIActivity"></activity>
+        <activity android:name=".FirebaseUIActivity" />
     </application>
 
 </manifest>

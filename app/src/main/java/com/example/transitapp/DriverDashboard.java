@@ -2,6 +2,7 @@ package com.example.transitapp;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,23 +25,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
-<<<<<<< HEAD
-=======
     //This is testing comment
     //This is testing comment2
-    private Button signOut;
->>>>>>> a98c46a754b70daa29599a38ab7de87867d840a5
     private Intent login;
     private Intent preInspectionIntent;
     private RelativeLayout layout, mainLayout;
     private PopupWindow popUp;
     private AutoCompleteTextView bus_num;
-    private TextView driverName;
+    private TextView driverName, dashboardTextView;
     private View parent, popupView;
     private PopupWindow popupWindow;
 
     private Button preInspection, startTrip, postInspection, signOut, beginInspection ;
     private ImageView pre_ins_btn_img, post_ins_btn_img, start_trip_btn_img, signout_btn_img;
+
+    public static final String Key1 = "Data";
 
 
 
@@ -65,6 +64,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
 
         driverName = findViewById(R.id.driver_name);
+        dashboardTextView = findViewById(R.id.dashboardtxt);
+
         parent = findViewById(R.id.driverDashboard);
         pre_ins_btn_img = findViewById(R.id.pre_insp_imageView);
         post_ins_btn_img = findViewById(R.id.post_insp_imageView);
@@ -81,6 +82,15 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         start_trip_btn_img.startAnimation(myAnim);
         post_ins_btn_img.startAnimation(myAnim);
         signout_btn_img.startAnimation(myAnim);
+
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // landscape
+            dashboardTextView.setText("Driver DashBoard");
+        } else {
+            // portrait
+            dashboardTextView.setText("Driver \nDashBoard");
+        }
 
 
     }
@@ -128,6 +138,10 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 // Use bounce interpolator with amplitude 0.2 and frequency 20
                 myAnim.setInterpolator(interpolator);
                 start_trip_btn_img.startAnimation(myAnim);
+
+                Intent myIntent = new Intent(this, Enroute_Dashboard.class);
+                myIntent.putExtra(Key1,"MyPranavKey");
+                startActivity(myIntent);
 
                 break;
 
