@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/driverDashboard"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_map">
+
+        <ImageView
+            android:id="@+id/header_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_map" />
+
+        <ImageButton
+            android:id="@+id/user_profile_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/header_cover_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-60dp"
+            android:background="@drawable/profile_circular_border_imageview"
+            android:elevation="5dp"
+            android:padding="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_account_circle_black_24dp" />
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_cover_image"
+            android:background="#FDA932"
+            android:elevation="4dp"
+            android:paddingBottom="24dp">
+
+
+            <Button
+                android:id="@+id/signOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:text="Sign Out"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/driver_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="76dp"
+                android:text="Viral Android"
+                android:textColor="#fff"
+                android:textSize="50sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_profile_short_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/driver_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:text="Driver Dashboard"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <!-- A CardView that contains a TextView -->
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/pres_inspec_card_view"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="370dp"
+                android:layout_margin="18sp"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardElevation="8dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp">
+                    <ImageView
+                        android:id="@+id/pre_insp_check_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/checklist" />
+                    <TextView
+                        android:id="@+id/preInpection_info_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:layout_below="@id/pre_insp_check_image"
+                        android:text="Pre Inspection Check"
+                        android:textSize="40dp" />
+                    <TextView
+                        android:id="@+id/preInspection_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/preInpection_info_text"
+                        android:textSize="30dp"
+                        android:text="Click here to start the pre-inspection check. This must be done before the start of the trip "/>
+                    <Button
+                        android:id="@+id/preInsepctionEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/preInspection_content"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:text="Edit"
+                        android:textColor="#F57F17"
+                        android:textSize="20dp"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- A CardView that contains a TextView -->
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/start_trip_card_view"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:layout_margin="18sp"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardElevation="8dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp">
+                    <ImageView
+                        android:id="@+id/start_trip_check_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_bus_white_36dp"
+                        android:background="#000000"/>
+                    <TextView
+                        android:id="@+id/startTrip_info_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/start_trip_check_image"
+                        android:text="Start Trip"
+                        android:textSize="80dp" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/post_inspec_card_view"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="370dp"
+                android:layout_margin="18sp"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardElevation="8dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp">
+                    <ImageView
+                        android:id="@+id/post_insp_check_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/checklist" />
+                    <TextView
+                        android:id="@+id/postInpection_info_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:layout_below="@id/post_insp_check_image"
+                        android:text="Post Inspection Check"
+                        android:textSize="40dp" />
+                    <TextView
+                        android:id="@+id/postInspection_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/postInpection_info_text"
+                        android:textSize="30dp"
+                        android:text="Click here to start the post-inspection check. This must be done at the end of the trip "/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/postInspection_content"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:text="Edit"
+                        android:textColor="#F57F17"
+                        android:textSize="20dp"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

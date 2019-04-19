@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DialogTitle;
 import android.util.Log;
 import android.view.Gravity;
@@ -39,7 +40,12 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private Button signOut;
     private Intent login;
     private Intent preInspectionIntent;
-    private Button preInspection;
+    private CardView preInspection;
+    private boolean preInspectionClicked = false;
+    private boolean postInspection = false;
+    private Button editPreinspection;
+    private Button editPostInspection;
+//    private Button preInspection;
     private Button beginInspection;
     private RelativeLayout layout;
     private RelativeLayout mainLayout;
@@ -51,12 +57,16 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_dashboard);
-
+//        setContentView(R.layout.activity_driver_dashboard);
+        setContentView(R.layout.material_driver_dashboard);
         login = new Intent(this, FirebaseUIActivity.class);
         signOut = findViewById(R.id.signOut);
-        preInspection = findViewById(R.id.pre_insp_check);
+        preInspection = findViewById(R.id.pres_inspec_card_view);
         signOut.setOnClickListener(this);
+        editPreinspection = findViewById(R.id.preInsepctionEdit);
+        if(!preInspectionClicked){
+            editPreinspection.setVisibility(View.GONE);
+        }
         preInspection.setOnClickListener(this);
         driverName = findViewById(R.id.driver_name);
         parent = findViewById(R.id.driverDashboard);
@@ -77,7 +87,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 }
             });
                     break;
-            case R.id.pre_insp_check:
+            case R.id.pres_inspec_card_view:
+                preInspectionClicked = true;
                 final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
                 dialog.setContentView(R.layout.busn_number_dialog);
                 dialog.setTitle("Select Bus Number");
@@ -94,6 +105,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onClick(View v) {
                         preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
+                        editPreinspection.setVisibility(View.VISIBLE);
                         startActivity(preInspectionIntent);
                         dialog.dismiss();
                     }
