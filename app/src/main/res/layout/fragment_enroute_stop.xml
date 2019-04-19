@@ -7,23 +7,60 @@
     android:orientation="vertical"
     tools:context=".Enroute_Stop_Fragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="100"
-        android:gravity="center"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="Driver name and bus number marquee"
-        app:autoSizeMaxTextSize="200sp"
-        app:autoSizeMinTextSize="10sp"
-        app:autoSizeTextType="uniform" />
+        android:layout_weight="90"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:orientation="horizontal">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="100" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="100" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="40"
+            android:background="@drawable/current_stop_back_img"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="45" />
+
+            <TextView
+                android:id="@+id/stopName_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:freezesText="false"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:lines="3"
+                android:maxLines="3"
+                android:minLines="1"
+                android:text="Current Stop Name Displayed here"
+                android:textColor="@color/fui_bgAnonymous"
+                app:autoSizeMaxTextSize="70sp"
+                app:autoSizeMinTextSize="14sp"
+                app:autoSizeStepGranularity="8sp"
+                app:autoSizeTextType="uniform" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="45" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="100" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +81,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="9" />
+                android:layout_weight="9.5" />
 
             <ImageButton
                 android:id="@+id/imageButton"
@@ -91,6 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="10" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -137,7 +175,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="9" />
+                android:layout_weight="9.5" />
 
             <ImageButton
                 android:id="@+id/imageButton3"
@@ -184,13 +222,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="10" />
+
         </LinearLayout>
 
     </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="100" />
 
 </LinearLayout>

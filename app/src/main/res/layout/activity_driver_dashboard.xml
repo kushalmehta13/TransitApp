@@ -72,7 +72,7 @@
                         android:layout_weight="10" />
 
                     <TextView
-                        android:id="@+id/dashboardtxt"
+                        android:id="@+id/driver_dashboard_txt"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
@@ -98,7 +98,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <TextView
-                android:id="@+id/driver_name"
+                android:id="@+id/driver_dash_driver_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -114,10 +114,10 @@
                 app:autoSizeMinTextSize="5sp"
                 app:autoSizeStepGranularity="14dp"
                 app:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toBottomOf="@+id/dashboardtxt"
+                app:layout_constraintBottom_toBottomOf="@+id/driver_dashboard_txt"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/dashboardtxt"
-                app:layout_constraintTop_toTopOf="@+id/dashboardtxt" />
+                app:layout_constraintStart_toEndOf="@+id/driver_dashboard_txt"
+                app:layout_constraintTop_toTopOf="@+id/driver_dashboard_txt" />
         </LinearLayout>
 
         <Space
@@ -164,10 +164,10 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
                 android:textSize="10sp"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/pre_insp_imageView"
-                app:layout_constraintEnd_toEndOf="@+id/pre_insp_imageView"
-                app:layout_constraintStart_toStartOf="@+id/pre_insp_imageView"
-                app:layout_constraintTop_toTopOf="@+id/pre_insp_imageView" />
+                app:layout_constraintBottom_toBottomOf="@id/pre_insp_imageView"
+                app:layout_constraintEnd_toEndOf="@id/pre_insp_imageView"
+                app:layout_constraintStart_toStartOf="@id/pre_insp_imageView"
+                app:layout_constraintTop_toTopOf="@id/pre_insp_imageView" />
 
         </android.support.constraint.ConstraintLayout>
 

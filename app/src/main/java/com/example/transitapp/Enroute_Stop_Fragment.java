@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -57,14 +58,24 @@ public class Enroute_Stop_Fragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+
+
+
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+       /* View group = inflater.inflate(R.layout.fragment_enroute_stop,
+                container, false);
+*/
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_enroute_stop, container, false);
+        //return group;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
