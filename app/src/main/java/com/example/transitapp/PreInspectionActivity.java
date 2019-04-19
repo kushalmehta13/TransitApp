@@ -1,5 +1,6 @@
 package com.example.transitapp;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -20,6 +21,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class PreInspectionActivity extends AppCompatActivity {
+    //TODO: @kushal
+    // 1. retrieve all the information from the firebase database to populate in the checks.
+    // 2. Submit the pre inspection check
+    // 3. retrieve the pre-inspection check if edit is clicked (IMPORTANT)
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -28,6 +33,15 @@ public class PreInspectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_inspection);
+
+        Intent i = getIntent();
+        Bundle editBundle = i.getBundleExtra("editBundle");
+        Boolean isEdit = editBundle.getBoolean("Edit");
+        if(isEdit){
+            // retrieve the pre-inspection check if edit is clicked (IMPORTANT)
+            System.out.println("Must get the edit version");
+        }
+
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 

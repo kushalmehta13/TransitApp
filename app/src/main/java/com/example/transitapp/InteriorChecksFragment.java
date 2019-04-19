@@ -26,7 +26,6 @@ public class InteriorChecksFragment extends Fragment {
     private ToggleButton checkerPositve;
     private CardView card;
     private HashMap<CardView, ToggleButton> card_toggle_map;
-//    private ToggleButton checkerNegative;
     private TextView label;
     @Nullable
     @Override

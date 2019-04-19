@@ -68,6 +68,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
             editPreinspection.setVisibility(View.GONE);
         }
         preInspection.setOnClickListener(this);
+        editPreinspection.setOnClickListener(this);
         driverName = findViewById(R.id.driver_name);
         parent = findViewById(R.id.driverDashboard);
 
@@ -105,6 +106,9 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onClick(View v) {
                         preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
+                        Bundle b = new Bundle();
+                        b.putBoolean("Edit", false);
+                        preInspectionIntent.putExtra("editBundle", b);
                         editPreinspection.setVisibility(View.VISIBLE);
                         startActivity(preInspectionIntent);
                         dialog.dismiss();
@@ -113,6 +117,14 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 dialog.show();
 
                     break;
+            case R.id.preInsepctionEdit:
+                System.out.println("here");
+                preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("Edit", true);
+                preInspectionIntent.putExtra("editBundle", b);
+                startActivity(preInspectionIntent);
+                break;
         }
 
     }

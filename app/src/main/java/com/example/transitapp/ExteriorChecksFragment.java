@@ -26,7 +26,6 @@ public class ExteriorChecksFragment extends Fragment {
     private LinearLayout root;
     private ToggleButton checkerPositve;
     private CardView card;
-//    private ToggleButton checkerNegative;
     private TextView label;
     private HashMap<CardView, ToggleButton> card_toggle_map;
     @Nullable
