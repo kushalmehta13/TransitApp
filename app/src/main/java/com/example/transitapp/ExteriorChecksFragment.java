@@ -14,6 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 public class ExteriorChecksFragment extends Fragment {
 
     private EditText other;
@@ -23,6 +28,7 @@ public class ExteriorChecksFragment extends Fragment {
     private CardView card;
 //    private ToggleButton checkerNegative;
     private TextView label;
+    private HashMap<CardView, ToggleButton> card_toggle_map;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,8 +53,8 @@ public class ExteriorChecksFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
         ((LinearLayout.LayoutParams) params2).setMargins(0, 50, 0, 0);
-        ((LinearLayout.LayoutParams) params4).setMargins(100, 50, 100, 0);
 //        ((LinearLayout.LayoutParams) params).setMargins(100, 50, 0, 0);
+        ((LinearLayout.LayoutParams) params4).setMargins(100, 50, 100, 0);
         ((LinearLayout.LayoutParams) params3).setMargins(100, 50, 0, 100);
 
         other = new EditText(getContext());
@@ -57,49 +63,70 @@ public class ExteriorChecksFragment extends Fragment {
         other.setTag("other_interior");
         other.setTextSize(40);
         other.setLayoutParams(params3);
+        card_toggle_map = new HashMap<CardView, ToggleButton>();
 
 
         for(String c: checks){
             horizontal = new LinearLayout(getContext());
             horizontal.setOrientation(LinearLayout.HORIZONTAL);
-            checkerPositve = new ToggleButton(getContext());
-            card = new CardView(getContext());
-            card.setLayoutParams(params4);
-            card.setRadius(9);
-            card.setMaxCardElevation(2);
-            card.setElevation(2);
-            card.setContentPadding(16,16,16,16);
-            checkerPositve.setText(null);
-            checkerPositve.setTextOn(null);
-            checkerPositve.setTextOff(null);
-            checkerPositve.setTag(c+"pos");
-            checkerPositve.setTextSize(40);
-            checkerPositve.setBackgroundDrawable(getContext().getDrawable(R.drawable.my_btn_toggle));
-
-//            checkerNegative = new ToggleButton(getContext());
-//            checkerNegative.setTag(c+"neg");
-//            checkerNegative.setTextSize(40);
-
-            checkerPositve.setLayoutParams(params);
-//            checkerNegative.setLayoutParams(params2);
-            label = new TextView(getContext());
-            label.setText(c);
-            label.setTextSize(40);
-            label.setLayoutParams(params);
+            createCards(c, params4);
+            createToggleButtons(c, params);
+            createLabels(c, params);
+            card_toggle_map.put(card, checkerPositve);
             horizontal.addView(checkerPositve);
-//            horizontal.addView(checkerNegative);
             horizontal.addView(label);
             card.addView(horizontal);
             root.addView(card);
         }
 
+        handleCardClicks(card_toggle_map);
         root.addView(other);
         return view;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    private void handleCardClicks(HashMap<CardView, ToggleButton> card_toggle_map) {
+        Set set = card_toggle_map.entrySet();
+        Iterator ct_iterator = set.iterator();
+        while(ct_iterator.hasNext()){
+            Map.Entry mentry = (Map.Entry) ct_iterator.next();
+            CardView c = (CardView) mentry.getKey();
+            final ToggleButton b = (ToggleButton) mentry.getValue();
+            c.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    b.toggle();
+                }
+            });
+        }
+    }
 
+    private void createLabels(String c, ViewGroup.LayoutParams params) {
+        label = new TextView(getContext());
+        label.setText(c);
+        label.setTextSize(40);
+        label.setLayoutParams(params);
+    }
+
+    private void createToggleButtons(String c, ViewGroup.LayoutParams params) {
+        checkerPositve = new ToggleButton(getContext());
+        checkerPositve.setTag(c+"_toggle");
+        checkerPositve.setText(null);
+        checkerPositve.setTextOn(null);
+        checkerPositve.setTextOff(null);
+        checkerPositve.setTag(c+"pos");
+        checkerPositve.setTextSize(40);
+        checkerPositve.setBackgroundDrawable(getContext().getDrawable(R.drawable.my_btn_toggle));
+        checkerPositve.setLayoutParams(params);
+
+    }
+
+    private void createCards(String c, ViewGroup.LayoutParams params4) {
+        card = new CardView(getContext());
+        card.setTag(c+"_card");
+        card.setLayoutParams(params4);
+        card.setRadius(9);
+        card.setMaxCardElevation(2);
+        card.setElevation(2);
+        card.setContentPadding(16,16,16,16);
     }
 }
