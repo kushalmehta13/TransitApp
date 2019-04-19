@@ -160,7 +160,6 @@
                 android:foregroundGravity="center"
                 android:gravity="center"
                 android:maxLines="2"
-                android:shadowRadius="@android:integer/config_shortAnimTime"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"
                 android:textSize="10sp"
                 android:visibility="visible"
@@ -236,7 +235,6 @@
                 android:layout_height="0dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:autoText="false"
                 android:background="@color/fui_transparent"
                 android:drawableStart="@drawable/transparent_square"
                 android:foregroundGravity="center"
@@ -250,7 +248,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/post_insp_imageView"
                 app:layout_constraintEnd_toEndOf="@+id/post_insp_imageView"
                 app:layout_constraintStart_toStartOf="@+id/post_insp_imageView"
-                app:layout_constraintTop_toTopOf="@+id/post_insp_imageView" />
+                app:layout_constraintTop_toTopOf="@+id/post_insp_imageView"
+                android:drawableLeft="@drawable/transparent_square" />
 
         </android.support.constraint.ConstraintLayout>
 
