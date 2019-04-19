@@ -32,6 +32,7 @@ public class PreInspectionActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = findViewById(R.id.container);
+        mViewPager.setOffscreenPageLimit(2);
         setupViewPager(mViewPager);
 
 

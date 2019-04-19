@@ -28,6 +28,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="30dp"/>
     <Button
+        style="@style/Widget.AppCompat.Button"
         android:id="@+id/pre_insp_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

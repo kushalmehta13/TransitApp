@@ -18,7 +18,7 @@ public class InteriorChecksFragment extends Fragment {
     private LinearLayout horizontal;
     private LinearLayout root;
     private ToggleButton checkerPositve;
-    private ToggleButton checkerNegative;
+//    private ToggleButton checkerNegative;
     private TextView label;
     @Nullable
     @Override
@@ -51,25 +51,30 @@ public class InteriorChecksFragment extends Fragment {
         other.setLayoutParams(params3);
 
 
+
         for(String c: checks){
             horizontal = new LinearLayout(getContext());
             horizontal.setOrientation(LinearLayout.HORIZONTAL);
             checkerPositve = new ToggleButton(getContext());
+            checkerPositve.setText(null);
+            checkerPositve.setTextOn(null);
+            checkerPositve.setTextOff(null);
             checkerPositve.setTag(c+"pos");
             checkerPositve.setTextSize(40);
+            checkerPositve.setBackgroundDrawable(getContext().getDrawable(R.drawable.my_btn_toggle));
 
-            checkerNegative = new ToggleButton(getContext());
-            checkerNegative.setTag(c+"neg");
-            checkerNegative.setTextSize(40);
+//            checkerNegative = new ToggleButton(getContext());
+//            checkerNegative.setTag(c+"neg");
+//            checkerNegative.setTextSize(40);
 
             checkerPositve.setLayoutParams(params);
-            checkerNegative.setLayoutParams(params2);
+//            checkerNegative.setLayoutParams(params2);
             label = new TextView(getContext());
             label.setText(c);
             label.setTextSize(40);
             label.setLayoutParams(params);
             horizontal.addView(checkerPositve);
-            horizontal.addView(checkerNegative);
+//            horizontal.addView(checkerNegative);
             horizontal.addView(label);
             root.addView(horizontal);
         }

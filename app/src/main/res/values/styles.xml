@@ -6,6 +6,16 @@
         <item name="colorPrimary">#FDA932</item>
         <item name="colorPrimaryDark">#FF9B671B</item>
         <item name="colorAccent">#000000</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+    </style>
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="FirebaseUI.TextInputEditText" parent="AppTheme">
