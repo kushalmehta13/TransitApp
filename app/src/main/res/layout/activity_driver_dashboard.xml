@@ -184,6 +184,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="85"
+            app:cardBackgroundColor="#B7FBB533"
             app:cardElevation="3dp"
             app:cardMaxElevation="10dp">
 
@@ -306,14 +307,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="100"
-            app:cardBackgroundColor="#B3AFAE"
+            android:background="#B7FBB533"
+            app:cardBackgroundColor="#B7FBB533"
             app:cardCornerRadius="0dp"
             app:cardElevation="2dp"
             app:cardMaxElevation="10dp">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="#B7FBB533">
 
                 <ImageView
                     android:id="@+id/signout_imageView"
