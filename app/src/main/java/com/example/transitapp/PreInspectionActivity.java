@@ -20,7 +20,12 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class PreInspectionActivity extends AppCompatActivity {
+
+
     //TODO: @kushal
     // 1. retrieve all the information from the firebase database to populate in the checks.
     // 2. Submit the pre inspection check
@@ -28,11 +33,18 @@ public class PreInspectionActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-
+    private InspectionChecklist inspectionChecklist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_inspection);
+
+        inspectionChecklist = new InspectionChecklist(getApplicationContext());
+        inspectionChecklist.getPreList();
+        System.out.println(inspectionChecklist.getPre());
+//        while(!inspectionChecklist.present){
+//            System.out.println("lol");
+//        }
 
         Intent i = getIntent();
         Bundle editBundle = i.getBundleExtra("editBundle");
