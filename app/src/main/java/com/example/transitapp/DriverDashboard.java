@@ -23,7 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
+public class DriverDashboard extends AppCompatActivity /*implements View.OnClickListener*/ {
     //This is testing comment
     //This is testing comment2
     private Intent login;
@@ -35,8 +35,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private View parent, popupView;
     private PopupWindow popupWindow;
 
-    private Button preInspection, startTrip, postInspection, signOut, beginInspection ;
-    private ImageView pre_ins_btn_img, post_ins_btn_img, start_trip_btn_img, signout_btn_img;
+    private Button /*preInspection, startTrip, postInspection, beginInspection, */ signOut ;
+    private ImageView /*pre_ins_btn_img, post_ins_btn_img, start_trip_btn_img,*/ signout_btn_img;
 
     public static final String Key1 = "Data";
 
@@ -50,15 +50,15 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
         login = new Intent(this, FirebaseUIActivity.class);
 
-        preInspection = findViewById(R.id.pre_insp_check_Btn);
+/*        preInspection = findViewById(R.id.pre_insp_check_Btn);
         startTrip = findViewById(R.id.start_trip_Btn);
-        postInspection = findViewById(R.id.post_insp_check_Btn);
+        postInspection = findViewById(R.id.post_insp_check_Btn);*/
         signOut = findViewById(R.id.signOut_Btn);
 
-        preInspection.setOnClickListener(this);
+      /*  preInspection.setOnClickListener(this);
         startTrip.setOnClickListener(this);
         postInspection.setOnClickListener(this);
-        signOut.setOnClickListener(this);
+        signOut.setOnClickListener(this);*/
 
 
 
@@ -66,9 +66,9 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         //dashboardTextView = findViewById(R.id.driver_dashboard_txt);
 
         parent = findViewById(R.id.driverDashboard);
-        pre_ins_btn_img = findViewById(R.id.pre_insp_imageView);
+/*        pre_ins_btn_img = findViewById(R.id.pre_insp_imageView);
         post_ins_btn_img = findViewById(R.id.post_insp_imageView);
-        start_trip_btn_img = findViewById(R.id.start_imageView);
+        start_trip_btn_img = findViewById(R.id.start_imageView);*/
         signout_btn_img = findViewById(R.id.signout_imageView);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -77,9 +77,9 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
         driverName.startAnimation(myAnim);
-        pre_ins_btn_img.startAnimation(myAnim);
+/*        pre_ins_btn_img.startAnimation(myAnim);
         start_trip_btn_img.startAnimation(myAnim);
-        post_ins_btn_img.startAnimation(myAnim);
+        post_ins_btn_img.startAnimation(myAnim);*/
         signout_btn_img.startAnimation(myAnim);
 
 
@@ -93,7 +93,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
 
     }
-
+/*
     @Override
     public void onClick(View v) {
 
@@ -168,7 +168,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
 
 
-        }
+        }*/
 
     }
-}
+/*}*/
