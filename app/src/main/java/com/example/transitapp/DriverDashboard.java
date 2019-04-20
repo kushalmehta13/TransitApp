@@ -63,7 +63,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
 
         driverName = findViewById(R.id.driver_dash_driver_name);
-        dashboardTextView = findViewById(R.id.driver_dashboard_txt);
+        //dashboardTextView = findViewById(R.id.driver_dashboard_txt);
 
         parent = findViewById(R.id.driverDashboard);
         pre_ins_btn_img = findViewById(R.id.pre_insp_imageView);
@@ -83,13 +83,13 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         signout_btn_img.startAnimation(myAnim);
 
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+       /* if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // landscape
             dashboardTextView.setText("Driver DashBoard");
         } else {
             // portrait
             dashboardTextView.setText("Driver \nDashBoard");
-        }
+        }*/
 
 
     }
