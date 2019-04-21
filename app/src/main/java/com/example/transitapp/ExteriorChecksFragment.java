@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -31,7 +32,9 @@ public class ExteriorChecksFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        String[] checks = getResources().getStringArray(R.array.exteriorChecks);
+        assert getArguments() != null;
+        ArrayList<String> checks = getArguments().getStringArrayList("ExteriorChecklist");
+//        String[] checks = getResources().getStringArray(R.array.exteriorChecks);
         View view = inflater.inflate(R.layout.exterior_checks_fragment, container, false);
         root = view.findViewById(R.id.root);
 

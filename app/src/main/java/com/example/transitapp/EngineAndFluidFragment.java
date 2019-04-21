@@ -17,6 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -35,7 +36,8 @@ public class EngineAndFluidFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        String[] checks = getResources().getStringArray(R.array.engineChecks);
+        assert getArguments() != null;
+        ArrayList<String> checks = getArguments().getStringArrayList("EngineChecklist");
         View view = inflater.inflate(R.layout.engine_and_fluids_fragment, container, false);
         root = view.findViewById(R.id.root);
 
