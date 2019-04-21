@@ -110,10 +110,12 @@
                 android:layout_weight="100" />
 
             <android.support.v7.widget.CardView
+                android:id="@+id/pres_inspec_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="25"
+                android:clickable="true"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="5dp"
                 app:cardMaxElevation="10dp">
@@ -121,6 +123,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
@@ -162,6 +167,15 @@
                         app:autoSizeTextType="uniform" />
 
                 </LinearLayout>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/pre_ins_edit_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:clickable="true"
+                    app:srcCompat="@android:drawable/ic_menu_edit" />
+
             </android.support.v7.widget.CardView>
 
             <Space
@@ -251,10 +265,12 @@
                 android:layout_weight="100" />
 
             <android.support.v7.widget.CardView
+                android:id="@+id/post_inspec_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="25"
+                android:clickable="true"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="3dp"
                 app:cardMaxElevation="10dp">
@@ -303,6 +319,15 @@
                         app:autoSizeTextType="uniform" />
 
                 </LinearLayout>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/post_ins_edit_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:clickable="true"
+                    app:srcCompat="@android:drawable/ic_menu_edit" />
+
             </android.support.v7.widget.CardView>
 
             <Space
