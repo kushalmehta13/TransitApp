@@ -2,12 +2,24 @@ package com.example.transitapp;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
+import static android.support.v4.content.ContextCompat.getSystemService;
 
 
 /**
@@ -29,6 +41,9 @@ public class Enroute_Stop_Fragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private TextView stu_entered_count_TxtView;
+    private EditText stu_entered_count_EditText;
 
     public Enroute_Stop_Fragment() {
         // Required empty public constructor
@@ -70,12 +85,49 @@ public class Enroute_Stop_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-       /* View group = inflater.inflate(R.layout.fragment_enroute_stop,
+        View group = inflater.inflate(R.layout.fragment_enroute_stop,
                 container, false);
-*/
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_enroute_stop, container, false);
-        //return group;
+        //return inflater.inflate(R.layout.fragment_enroute_stop, container, false);
+        stu_entered_count_EditText = (EditText) group.findViewById(R.id.stu_entered_editText);
+        stu_entered_count_TxtView = (TextView) group.findViewById(R.id.stu_entered_textView);
+
+        stu_entered_count_EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                stu_entered_count_TxtView.setText(stu_entered_count_EditText.getText());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        stu_entered_count_EditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == event.KEYCODE_ENTER || actionId == event.KEYCODE_NUMPAD_ENTER) {
+                    // Write your logic here that will be executed when user taps next button
+
+                    stu_entered_count_EditText.clearFocus();
+
+                    handled = false;
+                }
+                return handled;
+            }
+        });
+
+        return group;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

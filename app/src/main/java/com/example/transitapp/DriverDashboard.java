@@ -1,15 +1,12 @@
 package com.example.transitapp;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,7 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class DriverDashboard extends AppCompatActivity /*implements View.OnClickListener*/ {
+public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
     //This is testing comment
     //This is testing comment2
     private Intent login;
@@ -35,8 +32,8 @@ public class DriverDashboard extends AppCompatActivity /*implements View.OnClick
     private View parent, popupView;
     private PopupWindow popupWindow;
 
-    private Button /*preInspection, startTrip, postInspection, beginInspection, */ signOut ;
-    private ImageView /*pre_ins_btn_img, post_ins_btn_img, start_trip_btn_img,*/ signout_btn_img;
+    private Button /*preInspection, postInspection, beginInspection, */ startTrip, signOut ;
+    private ImageView /*pre_ins_btn_img, post_ins_btn_img,*/ start_trip_btn_img, signout_btn_img;
 
     public static final String Key1 = "Data";
 
@@ -50,25 +47,25 @@ public class DriverDashboard extends AppCompatActivity /*implements View.OnClick
 
         login = new Intent(this, FirebaseUIActivity.class);
 
-/*        preInspection = findViewById(R.id.pre_insp_check_Btn);
+/*        preInspection = findViewById(R.id.pre_insp_check_Btn);*/
         startTrip = findViewById(R.id.start_trip_Btn);
-        postInspection = findViewById(R.id.post_insp_check_Btn);*/
+        /*postInspection = findViewById(R.id.post_insp_check_Btn);*/
         signOut = findViewById(R.id.signOut_Btn);
 
-      /*  preInspection.setOnClickListener(this);
+      /*  preInspection.setOnClickListener(this);*/
         startTrip.setOnClickListener(this);
-        postInspection.setOnClickListener(this);
-        signOut.setOnClickListener(this);*/
+        /*postInspection.setOnClickListener(this);*/
+        signOut.setOnClickListener(this);
 
 
 
-        driverName = findViewById(R.id.driver_dash_driver_name);
+        driverName = findViewById(R.id.driver_dash_driver_name2);
         //dashboardTextView = findViewById(R.id.driver_dashboard_txt);
 
         parent = findViewById(R.id.driverDashboard);
 /*        pre_ins_btn_img = findViewById(R.id.pre_insp_imageView);
-        post_ins_btn_img = findViewById(R.id.post_insp_imageView);
-        start_trip_btn_img = findViewById(R.id.start_imageView);*/
+        post_ins_btn_img = findViewById(R.id.post_insp_imageView);*/
+        start_trip_btn_img = findViewById(R.id.start_imageView);
         signout_btn_img = findViewById(R.id.signout_imageView);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -77,9 +74,9 @@ public class DriverDashboard extends AppCompatActivity /*implements View.OnClick
 
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
         driverName.startAnimation(myAnim);
-/*        pre_ins_btn_img.startAnimation(myAnim);
+/*        pre_ins_btn_img.startAnimation(myAnim);*/
         start_trip_btn_img.startAnimation(myAnim);
-        post_ins_btn_img.startAnimation(myAnim);*/
+        /*post_ins_btn_img.startAnimation(myAnim);*/
         signout_btn_img.startAnimation(myAnim);
 
 
@@ -93,7 +90,7 @@ public class DriverDashboard extends AppCompatActivity /*implements View.OnClick
 
 
     }
-/*
+
     @Override
     public void onClick(View v) {
 
@@ -103,7 +100,7 @@ public class DriverDashboard extends AppCompatActivity /*implements View.OnClick
         switch (v.getId()){
 
 
-            case R.id.pre_insp_check_Btn:
+            /*case R.id.pre_insp_check_Btn:
 
                 // Use bounce interpolator with amplitude 0.2 and frequency 20
                 myAnim.setInterpolator(interpolator);
@@ -131,7 +128,7 @@ public class DriverDashboard extends AppCompatActivity /*implements View.OnClick
                 dialog.show();
 
                 break;
-
+*/
             case R.id.start_trip_Btn:
 
                 // Use bounce interpolator with amplitude 0.2 and frequency 20
@@ -144,14 +141,14 @@ public class DriverDashboard extends AppCompatActivity /*implements View.OnClick
 
                 break;
 
-            case R.id.post_insp_check_Btn:
+  /*          case R.id.post_insp_check_Btn:
 
                 // Use bounce interpolator with amplitude 0.2 and frequency 20
                 myAnim.setInterpolator(interpolator);
                 post_ins_btn_img.startAnimation(myAnim);
 
                 break;
-
+*/
             case R.id.signOut_Btn:
                 // Use bounce interpolator with amplitude 0.2 and frequency 20
                 myAnim.setInterpolator(interpolator);
@@ -168,7 +165,7 @@ public class DriverDashboard extends AppCompatActivity /*implements View.OnClick
 
 
 
-        }*/
+        }
 
     }
-/*}*/
+}

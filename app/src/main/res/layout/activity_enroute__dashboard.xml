@@ -33,93 +33,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="95"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_marginBottom="8dp"
+            android:layout_weight="94"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/ic_launcher_background"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="20dp">
 
-            <android.support.constraint.ConstraintLayout
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="70">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/fui_transparent"
-                    android:scaleType="fitXY"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/dashboard_tab" />
+                <TextView
+                    android:id="@+id/enroutedashboardtxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="50"
+                    android:fontFamily="@font/faster_one"
+                    android:gravity="center"
+                    android:lines="2"
+                    android:text="Enroute Dashboard"
+                    android:textColor="#D8FFFFFF"
+                    app:autoSizeMaxTextSize="80sp"
+                    app:autoSizeMinTextSize="5sp"
+                    app:autoSizeStepGranularity="5sp"
+                    app:autoSizeTextType="uniform" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/driver_dash_driver_name2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="100"
+                    android:fontFamily="@font/catamaran_bold"
+                    android:gravity="center"
+                    android:text="Welcome, Driver Name"
+                    android:textColor="@color/fui_bgGitHub"
+                    app:autoSizeMaxTextSize="40sp"
+                    app:autoSizeMinTextSize="5sp"
+                    app:autoSizeStepGranularity="5sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="10" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/enroutedashboardtxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/faster_one"
-                        android:gravity="center|start"
-                        android:lines="2"
-                        android:textColor="#000000"
-                        app:autoSizeMaxTextSize="80sp"
-                        app:autoSizeMinTextSize="5sp"
-                        app:autoSizeTextType="uniform"
-                        app:layout_constraintBottom_toBottomOf="@+id/dashboard_tab_imgView"
-                        app:layout_constraintEnd_toEndOf="@+id/dashboard_tab_imgView"
-                        app:layout_constraintStart_toStartOf="@+id/dashboard_tab_imgView"
-                        app:layout_constraintTop_toTopOf="@+id/dashboard_tab_imgView" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="10" />
-                </LinearLayout>
-
-            </android.support.constraint.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/driver_dash_driver_name2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="130"
-                android:fontFamily="casual"
-                android:gravity="center"
-                android:text="Hello, Driver Name"
-                android:textSize="38sp"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="5sp"
-                app:autoSizeStepGranularity="14dp"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toBottomOf="@+id/driver_dashboard_txt"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/driver_dashboard_txt"
-                app:layout_constraintTop_toTopOf="@+id/driver_dashboard_txt" />
-
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
         <Space
             android:layout_width="match_parent"
@@ -129,7 +97,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="103"
+            android:layout_weight="102"
             android:background="@drawable/bus_display_board"
             android:gravity="center|center_horizontal|center_vertical"
             android:orientation="horizontal">
@@ -142,36 +110,34 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="8"
-                android:gravity="center"
+                android:layout_weight="10"
                 android:orientation="vertical">
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="45" />
 
                 <TextView
                     android:id="@+id/marquee_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="10"
+                    android:layout_weight="13"
                     android:ellipsize="marquee"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:fontFamily="@font/press_start_2p"
+                    android:fontFamily="@font/catamaran_extrabold"
                     android:freezesText="true"
                     android:gravity="center"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
-                    android:text="Bus No : 000 | Route : Courtney Road"
+                    android:text="Bus No : 711 | Route : Courtney Road"
                     android:textColor="@color/fui_bgAnonymous"
-                    app:autoSizeMaxTextSize="60sp"
-                    app:autoSizeMinTextSize="14sp"
-                    app:autoSizeStepGranularity="8sp"
+                    app:autoSizeMaxTextSize="500sp"
+                    app:autoSizeMinTextSize="5sp"
+                    app:autoSizeStepGranularity="1sp"
                     app:autoSizeTextType="uniform" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100" />
             </LinearLayout>
 
             <Space
@@ -184,7 +150,7 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="40">
+            android:layout_weight="45">
 
             <fragment
                 android:id="@+id/fragment"
@@ -206,10 +172,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="80"
+                android:layout_weight="70"
                 android:animationResolution="@android:integer/config_mediumAnimTime"
                 android:progress="3"
-                android:thumb="@drawable/seekbar_thumb_img"
                 android:visibility="visible" />
 
             <LinearLayout

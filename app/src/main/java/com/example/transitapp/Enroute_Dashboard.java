@@ -36,13 +36,13 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
         enroute_dash_TextView = (TextView) findViewById(R.id.enroutedashboardtxt);
         Marquee_Txt.setSelected(true);
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+/*        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // landscape
             enroute_dash_TextView.setText("Enroute DashBoard");
         } else {
             // portrait
             enroute_dash_TextView.setText("Enroute \nDashBoard");
-        }
+        }*/
 
 
         seek_Bar = (SeekBar) findViewById(R.id.seekBar);
