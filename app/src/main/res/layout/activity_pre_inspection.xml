@@ -42,12 +42,27 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:padding="@dimen/fab_margin">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:srcCompat="@drawable/ic_send_white_24dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@id/submit"
+            app:srcCompat="@drawable/ic_camera_alt_white_24dp" />
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

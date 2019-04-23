@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DialogTitle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,6 +35,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
@@ -54,6 +57,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private TextView driverName;
     private View parent, popupView;
     private PopupWindow popupWindow;
+    private FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +76,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         driverName = findViewById(R.id.driver_name);
         parent = findViewById(R.id.driverDashboard);
 
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         driverName.setText("Hello, " + user.getDisplayName());
     }
 
@@ -105,13 +108,22 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 beginInspection.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
-                        Bundle b = new Bundle();
-                        b.putBoolean("Edit", false);
-                        preInspectionIntent.putExtra("editBundle", b);
-                        editPreinspection.setVisibility(View.VISIBLE);
-                        startActivity(preInspectionIntent);
-                        dialog.dismiss();
+
+                        if(TextUtils.isEmpty(bus_num.getText())){
+                            bus_num.setError("Bus number is required");
+                        }
+                        else{
+                            preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
+                            Bundle b = new Bundle();
+                            b.putBoolean("Edit", false);
+                            preInspectionIntent.putExtra("editBundle", b);
+                            editPreinspection.setVisibility(View.VISIBLE);
+                            System.out.println(user.getDisplayName());
+                            System.out.println(bus_num.getText());
+                            System.out.println(new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
+                            startActivity(preInspectionIntent);
+                            dialog.dismiss();
+                        }
                     }
                 });
                 dialog.show();

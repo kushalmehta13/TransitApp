@@ -50,6 +50,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
     protected void onPostExecute(String result){
         super.onPostExecute(result);
+        // TODO: check what the result is for. Ideally, check a field for the URL and check its parameters
         HashMap<String, ArrayList> pre = new HashMap<>();
         try {
             JSONObject jsonResponse = new JSONObject(result);
