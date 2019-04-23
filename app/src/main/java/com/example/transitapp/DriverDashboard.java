@@ -134,6 +134,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
                 Bundle b = new Bundle();
                 b.putBoolean("Edit", true);
+                b.putString("Driver name", user.getDisplayName());
+                b.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
                 preInspectionIntent.putExtra("editBundle", b);
                 startActivity(preInspectionIntent);
                 break;
