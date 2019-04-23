@@ -27,7 +27,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class PreInspectionActivity extends AppCompatActivity {
@@ -87,13 +89,20 @@ public class PreInspectionActivity extends AppCompatActivity {
                 exteriorCheckFragment.setArguments(exBundle);
                 interiorCheckFragment.setArguments(inBundle);
                 Intent i = getIntent();
-                Bundle editBundle = i.getBundleExtra("editBundle");
-                Boolean isEdit = editBundle.getBoolean("Edit");
+                Bundle b = i.getBundleExtra("editBundle");
+                Boolean isEdit = b.getBoolean("Edit");
                 if(isEdit){
                     // retrieve the pre-inspection check if edit is clicked (IMPORTANT)
                     System.out.println("Must get the edit version");
                 }
 
+                String driverName = b.getString("Driver name");
+                Integer bus_number = b.getInt("Bus number");
+                String timestamp = b.getString("Timestamp");
+
+                System.out.println(driverName);
+                System.out.println(bus_number);
+                System.out.println(timestamp);
 
                 mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 

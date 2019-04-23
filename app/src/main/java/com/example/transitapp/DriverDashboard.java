@@ -116,11 +116,11 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                             preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
                             Bundle b = new Bundle();
                             b.putBoolean("Edit", false);
+                            b.putString("Driver name", user.getDisplayName());
+                            b.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
+                            b.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
                             preInspectionIntent.putExtra("editBundle", b);
                             editPreinspection.setVisibility(View.VISIBLE);
-                            System.out.println(user.getDisplayName());
-                            System.out.println(bus_num.getText());
-                            System.out.println(new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
                             startActivity(preInspectionIntent);
                             dialog.dismiss();
                         }
