@@ -22,18 +22,22 @@ import java.util.Set;
 
 public class ExteriorChecksFragment extends Fragment {
 
-    private EditText other;
+    public EditText other;
     private LinearLayout horizontal;
     private LinearLayout root;
     private ToggleButton checkerPositve;
     private CardView card;
     private TextView label;
     private HashMap<CardView, ToggleButton> card_toggle_map;
+    private HashMap<String, Boolean> label_toggle_map;
+    private PreInspectionActivity parentActivity;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         assert getArguments() != null;
         ArrayList<String> checks = getArguments().getStringArrayList("ExteriorChecklist");
+        parentActivity = (PreInspectionActivity) getActivity();
+        label_toggle_map = new HashMap<>();
 //        String[] checks = getResources().getStringArray(R.array.exteriorChecks);
         View view = inflater.inflate(R.layout.exterior_checks_fragment, container, false);
         root = view.findViewById(R.id.root);
@@ -75,28 +79,42 @@ public class ExteriorChecksFragment extends Fragment {
             createToggleButtons(c, params);
             createLabels(c, params);
             card_toggle_map.put(card, checkerPositve);
+            label_toggle_map.put(c, false);
             horizontal.addView(checkerPositve);
             horizontal.addView(label);
             card.addView(horizontal);
             root.addView(card);
         }
-
+        parentActivity.preInspectionCheckValues.put("Exterior Checks", label_toggle_map);
         handleCardClicks(card_toggle_map);
+        handOthers(other);
         root.addView(other);
         return view;
     }
 
-    private void handleCardClicks(HashMap<CardView, ToggleButton> card_toggle_map) {
+    private void handOthers(final EditText other) {
+        other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parentActivity.others.put("Exterior Checks", String.valueOf(other.getText()));
+            }
+        });
+    }
+
+    private void handleCardClicks(final HashMap<CardView, ToggleButton> card_toggle_map) {
         Set set = card_toggle_map.entrySet();
         Iterator ct_iterator = set.iterator();
         while(ct_iterator.hasNext()){
             Map.Entry mentry = (Map.Entry) ct_iterator.next();
             CardView c = (CardView) mentry.getKey();
+            final String l = (String) c.getTag();
             final ToggleButton b = (ToggleButton) mentry.getValue();
             c.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     b.toggle();
+                    label_toggle_map.put(l.split("_")[0], true);
+                    parentActivity.preInspectionCheckValues.put("Exterior Checks", label_toggle_map);
                 }
             });
         }

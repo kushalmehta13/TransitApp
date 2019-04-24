@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -25,12 +26,16 @@ import android.view.ViewGroup;
 
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class PreInspectionActivity extends AppCompatActivity {
 
@@ -65,12 +70,22 @@ public class PreInspectionActivity extends AppCompatActivity {
     private Bundle exBundle;
     private Bundle enBundle;
 
+    private UpdateDatabase updateDatabase;
+
+
+    private FloatingActionButton send;
+    public HashMap<String, HashMap<String, Boolean>> preInspectionCheckValues;
+    public HashMap<String, String> others;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_inspection);
+        preInspectionCheckValues = new HashMap<>();
+        others = new HashMap<>();
+        updateDatabase = new UpdateDatabase();
+        send = findViewById(R.id.submit);
         inspectionChecklist = new InspectionChecklist(getApplicationContext(), ACTION);
         inspectionChecklist.getPreList();
         progressDialog = ProgressDialog.show(this, "Getting Data", "Waiting for results...", true);
@@ -134,8 +149,36 @@ public class PreInspectionActivity extends AppCompatActivity {
         };
 
 
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(preInspectionCheckValues);
+                updateDatabase.sendPreInspectionCheck(preInspectionCheckValues, others, driverName, bus_number, timestamp);
+            }
+        });
+
 
     }
+
+//    private void prepareJSON(HashMap<String, HashMap<CardView, ToggleButton>> preInspectionCheckValues) {
+//        HashMap<String, HashMap<String, Boolean>> finalValues  = new HashMap<>();
+//        HashMap<CardView, ToggleButton> innerChecks = new HashMap<>();
+//        HashMap<String, Boolean> innerCheckValues = new HashMap<>();
+//        Iterator it = preInspectionCheckValues.entrySet().iterator();
+//        while(it.hasNext()){
+//            Map.Entry pair = (Map.Entry) it.next();
+//            innerChecks = (HashMap<CardView, ToggleButton>) pair.getValue();
+//            Iterator ot = innerChecks.entrySet().iterator();
+//            while(ot.hasNext()){
+//                Map.Entry innerPair = (Map.Entry) ot.next();
+//                CardView c = innerPair.getKey();
+//                ToggleButton b = innerPair.getValue();
+//                innerCheckValues.put(c.getTag());
+//            }
+//
+//
+//        }
+//    }
 
     private void getLatestPreInspectionCheck(String driverName, int bus_number) {
         //TODO: Use the two arguments to get the latest record of the pre-inspection check
