@@ -39,12 +39,6 @@ import java.util.Map;
 
 public class PreInspectionActivity extends AppCompatActivity {
 
-
-    //TODO: @kushal
-    // 1. retrieve all the information from the firebase database to populate in the checks.
-    // 2. Submit the pre inspection check
-    // 3. retrieve the pre-inspection check if edit is clicked (IMPORTANT)
-
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private InspectionChecklist inspectionChecklist;
@@ -160,25 +154,6 @@ public class PreInspectionActivity extends AppCompatActivity {
 
     }
 
-//    private void prepareJSON(HashMap<String, HashMap<CardView, ToggleButton>> preInspectionCheckValues) {
-//        HashMap<String, HashMap<String, Boolean>> finalValues  = new HashMap<>();
-//        HashMap<CardView, ToggleButton> innerChecks = new HashMap<>();
-//        HashMap<String, Boolean> innerCheckValues = new HashMap<>();
-//        Iterator it = preInspectionCheckValues.entrySet().iterator();
-//        while(it.hasNext()){
-//            Map.Entry pair = (Map.Entry) it.next();
-//            innerChecks = (HashMap<CardView, ToggleButton>) pair.getValue();
-//            Iterator ot = innerChecks.entrySet().iterator();
-//            while(ot.hasNext()){
-//                Map.Entry innerPair = (Map.Entry) ot.next();
-//                CardView c = innerPair.getKey();
-//                ToggleButton b = innerPair.getValue();
-//                innerCheckValues.put(c.getTag());
-//            }
-//
-//
-//        }
-//    }
 
     private void getLatestPreInspectionCheck(String driverName, int bus_number) {
         //TODO: Use the two arguments to get the latest record of the pre-inspection check

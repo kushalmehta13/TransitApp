@@ -41,11 +41,18 @@ import java.util.List;
 
 public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
     private Button signOut;
+
+
     private Intent login;
     private Intent preInspectionIntent;
+    private Intent postInspectionIntent;
+
+
+
     private CardView preInspection;
+    private CardView postInspection;
     private boolean preInspectionClicked = false;
-    private boolean postInspection = false;
+    private boolean postInspectionClicked = false;
     private Button editPreinspection;
     private Button editPostInspection;
 //    private Button preInspection;
@@ -66,12 +73,19 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         login = new Intent(this, FirebaseUIActivity.class);
         signOut = findViewById(R.id.signOut);
         preInspection = findViewById(R.id.pres_inspec_card_view);
+        postInspection = findViewById(R.id.post_inspec_card_view);
+
         signOut.setOnClickListener(this);
         editPreinspection = findViewById(R.id.preInsepctionEdit);
+        editPostInspection = findViewById(R.id.postInspectionEdit);
+        if(!postInspectionClicked){
+            editPostInspection.setVisibility(View.GONE);
+        }
         if(!preInspectionClicked){
             editPreinspection.setVisibility(View.GONE);
         }
         preInspection.setOnClickListener(this);
+        postInspection.setOnClickListener(this);
         editPreinspection.setOnClickListener(this);
         driverName = findViewById(R.id.driver_name);
         parent = findViewById(R.id.driverDashboard);
@@ -129,15 +143,37 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 dialog.show();
 
                     break;
+            case R.id.post_inspec_card_view:
+                postInspectionClicked = true;
+                postInspectionIntent = new Intent(DriverDashboard.this, PostInspectionActivty.class);
+//                Bundle b1 = new Bundle();
+//                b1.putBoolean("Edit", false);
+//                b1.putString("Driver name", user.getDisplayName());
+//                b1.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
+//                b1.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
+//                postInspectionIntent.putExtra("editBundle", b1);
+                startActivity(postInspectionIntent);
+                editPostInspection.setVisibility(View.VISIBLE);
+                break;
+
             case R.id.preInsepctionEdit:
-                System.out.println("here");
                 preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
-                Bundle b = new Bundle();
-                b.putBoolean("Edit", true);
-                b.putString("Driver name", user.getDisplayName());
-                b.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
-                preInspectionIntent.putExtra("editBundle", b);
+                Bundle b2 = new Bundle();
+                b2.putBoolean("Edit", true);
+                b2.putString("Driver name", user.getDisplayName());
+                b2.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
+                preInspectionIntent.putExtra("editBundle", b2);
                 startActivity(preInspectionIntent);
+                break;
+
+            case R.id.postInspectionEdit:
+                postInspectionIntent = new Intent(DriverDashboard.this, PostInspectionActivty.class);
+//                Bundle b3 = new Bundle();
+//                b3.putBoolean("Edit", true);
+//                b3.putString("Driver name", user.getDisplayName());
+//                b3.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
+//                postInspectionIntent.putExtra("editBundle", b3);
+                startActivity(postInspectionIntent);
                 break;
         }
 
