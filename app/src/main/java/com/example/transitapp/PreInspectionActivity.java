@@ -5,47 +5,20 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -121,8 +94,6 @@ public class PreInspectionActivity extends AppCompatActivity {
                 if(isEdit){
                     // retrieve the pre-inspection check if edit is clicked (IMPORTANT)
                     progressDialog.show();
-                    System.out.println("Must get the edit version");
-                    System.out.println(sentInspectionID);
                     db.collection("Pre Inspection Check").document(sentInspectionID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -186,11 +157,6 @@ public class PreInspectionActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(preInspectionCheckValues);
-                System.out.println(others);
-                System.out.println(bus_number);
-                System.out.println(driverName);
-                System.out.println(timestamp);
                 updateDatabase.sendPreInspectionCheck(preInspectionCheckValues, others, driverName, bus_number, sentInspectionID, timestamp);
                 Intent intent = new Intent();
                 intent.putExtra(DriverDashboard.SHOW_PRE_EDIT, true);
@@ -203,7 +169,6 @@ public class PreInspectionActivity extends AppCompatActivity {
     }
 
     private void handleResponse(DocumentSnapshot documentSnapshot, Bundle b, Intent intent) {
-        System.out.println(documentSnapshot);
         HashMap checks = (HashMap<String, HashMap<String, Boolean>>) documentSnapshot.getData().get("checks");
         HashMap PreInspectionCompleted = new HashMap<String, HashMap<String, Boolean>>();
         Iterator it = checks.entrySet().iterator();
