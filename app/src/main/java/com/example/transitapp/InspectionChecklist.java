@@ -29,7 +29,7 @@ public class InspectionChecklist {
     JSONObject jsonResponse;
     private HashMap<String, ArrayList> pre;
     private HashMap<String, ArrayList> post;
-    private String BASE_URL_PRE = "https://us-central1-transitapp-d5956.cloudfunctions.net/GetInspectionCheckList?type=pre";
+    private String BASE_URL_PRE = "https://us-central1-transitapp-d5956.cloudfunctions.net/api/GetInspectionCheckList?type=pre";
     private String BASE_URL_POST = "https://us-central1-transitapp-d5956.cloudfunctions.net/GetInspectionCheckList?type=post";
     public  boolean present = false;
 

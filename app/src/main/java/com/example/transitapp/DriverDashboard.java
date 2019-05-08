@@ -106,6 +106,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
             });
                     break;
             case R.id.pres_inspec_card_view:
+                editPreinspection.setVisibility(View.GONE);
                 final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
                 dialog.setContentView(R.layout.busn_number_dialog);
                 dialog.setTitle("Select Bus Number");
@@ -159,6 +160,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 b2.putBoolean("Edit", true);
                 b2.putString("Driver name", user.getDisplayName());
                 b2.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
+                b2.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
                 preInspectionIntent.putExtra("editBundle", b2);
                 startActivity(preInspectionIntent);
                 break;

@@ -54,25 +54,26 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         HashMap<String, ArrayList> pre = new HashMap<>();
         try {
             JSONObject jsonResponse = new JSONObject(result);
-            JSONArray InteriorChecks = (JSONArray) jsonResponse.getJSONObject("_fieldsProto").getJSONObject("Interior Checks").getJSONObject("arrayValue").get("values");
+            JSONArray InteriorChecks = (JSONArray) jsonResponse.getJSONObject("values").get("interior_checks");
+            System.out.println(InteriorChecks);
             // Adding interior checklist
             pre.put("Interior Checks", new ArrayList());
             for(int i=0;i<InteriorChecks.length();++i){
-                pre.get("Interior Checks").add(InteriorChecks.getJSONObject(i).get("stringValue"));
+                pre.get("Interior Checks").add(InteriorChecks.get(i));
             }
 
-            JSONArray ExteriorChecks = (JSONArray) jsonResponse.getJSONObject("_fieldsProto").getJSONObject("Exterior Checks").getJSONObject("arrayValue").get("values");
+            JSONArray ExteriorChecks = (JSONArray) jsonResponse.getJSONObject("values").get("exterior_checks");
             // Adding exterior checklist
             pre.put("Exterior Checks", new ArrayList());
             for(int i=0;i<ExteriorChecks.length();++i){
-                pre.get("Exterior Checks").add(ExteriorChecks.getJSONObject(i).get("stringValue"));
+                pre.get("Exterior Checks").add(ExteriorChecks.get(i));
             }
 
-            JSONArray EngineChecks = (JSONArray) jsonResponse.getJSONObject("_fieldsProto").getJSONObject("Engine & Fluids Levels").getJSONObject("arrayValue").get("values");
+            JSONArray EngineChecks = (JSONArray) jsonResponse.getJSONObject("values").get("engine_and_fluids_levels");
             // Adding Engine checklist
             pre.put("Engine Checks", new ArrayList());
             for(int i=0;i<EngineChecks.length();++i){
-                pre.get("Engine Checks").add(EngineChecks.getJSONObject(i).get("stringValue"));
+                pre.get("Engine Checks").add(EngineChecks.get(i));
             }
             Intent i = new Intent(mAction);
             i.putExtra("IntCheck", pre.get("Interior Checks"));

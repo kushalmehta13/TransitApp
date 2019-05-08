@@ -30,11 +30,13 @@ public class InteriorChecksFragment extends Fragment {
     private HashMap<String, Boolean> label_toggle_map;
     private TextView label;
     private PreInspectionActivity parentActivity;
+    private HashMap<String, Boolean> toEdit;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         assert getArguments() != null;
         ArrayList<String> checks = getArguments().getStringArrayList("InteriorChecklist");
+        toEdit = (HashMap<String, Boolean>) getArguments().getSerializable("toEdit");
         parentActivity = (PreInspectionActivity) getActivity();
         label_toggle_map = new HashMap<>();
         View view = inflater.inflate(R.layout.interior_checks_fragment, container, false);
@@ -80,6 +82,14 @@ public class InteriorChecksFragment extends Fragment {
             label_toggle_map.put(c, false);
             horizontal.addView(checkerPositve);
             horizontal.addView(label);
+            if(toEdit!=null){
+                if(toEdit.get(c)){
+                    System.out.println(c);
+                    checkerPositve.toggle();
+                    card_toggle_map.put(card, checkerPositve);
+                    label_toggle_map.put(c, true);
+                }
+            }
             card.addView(horizontal);
             root.addView(card);
         }
@@ -107,11 +117,30 @@ public class InteriorChecksFragment extends Fragment {
             CardView c = (CardView) mentry.getKey();
             final String l = (String) c.getTag();
             final ToggleButton b = (ToggleButton) mentry.getValue();
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(b.isChecked()){
+                        label_toggle_map.put(l.split("_")[0], true);
+                    }
+                    else{
+                        label_toggle_map.put(l.split("_")[0], false);
+                    }
+                    System.out.println(label_toggle_map.get(l.split("_")[0]));
+                    parentActivity.preInspectionCheckValues.put("Interior Checks", label_toggle_map);
+                }
+            });
             c.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     b.toggle();
-                    label_toggle_map.put(l.split("_")[0], true);
+                    if(b.isChecked()){
+                        label_toggle_map.put(l.split("_")[0], true);
+                    }
+                    else{
+                        label_toggle_map.put(l.split("_")[0], false);
+                    }
+                    System.out.println(label_toggle_map.get(l.split("_")[0]));
                     parentActivity.preInspectionCheckValues.put("Interior Checks", label_toggle_map);
                 }
             });

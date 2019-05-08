@@ -30,8 +30,12 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -56,7 +60,7 @@ public class PreInspectionActivity extends AppCompatActivity {
     private Fragment engineAndFluidFragment;
     private Fragment exteriorCheckFragment;
     private Fragment interiorCheckFragment;
-
+    private TextView bus_num;
 
 
     private BroadcastReceiver receiver;
@@ -76,19 +80,21 @@ public class PreInspectionActivity extends AppCompatActivity {
     private UpdateDatabase updateDatabase;
 
 
+
     private FloatingActionButton send;
     public HashMap<String, HashMap<String, Boolean>> preInspectionCheckValues;
     public HashMap<String, String> others;
 
     private FirebaseFirestore db;
 
-    private static Boolean sent = false;
 
+    public static String sentInspectionID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_inspection);
+        bus_num = findViewById(R.id.bus_num);
         preInspectionCheckValues = new HashMap<>();
         others = new HashMap<>();
         updateDatabase = new UpdateDatabase();
@@ -101,21 +107,42 @@ public class PreInspectionActivity extends AppCompatActivity {
         receiver = new BroadcastReceiver()
         {
             @Override
-            public void onReceive(Context context, Intent intent)
+            public void onReceive(Context context, final Intent intent)
             {
                 if(progressDialog.isShowing()){
                     progressDialog.dismiss();
                 }
                 Intent i = getIntent();
-                Bundle b = i.getBundleExtra("editBundle");
+                final Bundle b = i.getBundleExtra("editBundle");
                 Boolean isEdit = b.getBoolean("Edit");
                 driverName = b.getString("Driver name");
                 bus_number = b.getInt("Bus number");
-                System.out.println(bus_number);
-                System.out.println(sent);
+                bus_num.setText("Bus Number: "+ bus_number);
                 if(isEdit){
                     // retrieve the pre-inspection check if edit is clicked (IMPORTANT)
+                    progressDialog.show();
                     System.out.println("Must get the edit version");
+                    System.out.println(sentInspectionID);
+                    db.collection("Pre Inspection Check").document(sentInspectionID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            handleResponse(documentSnapshot, b, intent);
+                            progressDialog.dismiss();
+
+
+                            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+                            mViewPager = findViewById(R.id.container);
+                            mViewPager.setOffscreenPageLimit(2);
+                            setupViewPager(mViewPager);
+
+
+
+                            TabLayout tabLayout = findViewById(R.id.tabs);
+                            tabLayout.setupWithViewPager(mViewPager);
+
+                        }
+                    });
 //                    getLatestPreInspectionCheck(driverName, bus_number);
                     // Will give an error right now. Need to populate the bundle to be sent to the fragments.
                 }
@@ -138,18 +165,19 @@ public class PreInspectionActivity extends AppCompatActivity {
                     engineAndFluidFragment.setArguments(enBundle);
                     exteriorCheckFragment.setArguments(exBundle);
                     interiorCheckFragment.setArguments(inBundle);
+
+                    mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+                    mViewPager = findViewById(R.id.container);
+                    mViewPager.setOffscreenPageLimit(2);
+                    setupViewPager(mViewPager);
+
+
+
+                    TabLayout tabLayout = findViewById(R.id.tabs);
+                    tabLayout.setupWithViewPager(mViewPager);
                 }
 
-                mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-                mViewPager = findViewById(R.id.container);
-                mViewPager.setOffscreenPageLimit(2);
-                setupViewPager(mViewPager);
-
-
-
-                TabLayout tabLayout = findViewById(R.id.tabs);
-                tabLayout.setupWithViewPager(mViewPager);
 
             }
         };
@@ -159,7 +187,11 @@ public class PreInspectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println(preInspectionCheckValues);
-                updateDatabase.sendPreInspectionCheck(preInspectionCheckValues, others, driverName, bus_number, timestamp);
+                System.out.println(others);
+                System.out.println(bus_number);
+                System.out.println(driverName);
+                System.out.println(timestamp);
+                updateDatabase.sendPreInspectionCheck(preInspectionCheckValues, others, driverName, bus_number, sentInspectionID, timestamp);
                 Intent intent = new Intent();
                 intent.putExtra(DriverDashboard.SHOW_PRE_EDIT, true);
                 setResult(RESULT_OK, intent);
@@ -170,27 +202,46 @@ public class PreInspectionActivity extends AppCompatActivity {
 
     }
 
-
-    private void getLatestPreInspectionCheck(String driverName, int bus_number) {
-        //TODO: Use the two arguments to get the latest record of the pre-inspection check
-        System.out.println("getting latest record");
-        CollectionReference preInspRecord = db.collection("Pre Inspection Check");
-        Query query = preInspRecord.whereEqualTo("Driver Name", driverName).whereEqualTo("Bus Number", bus_number);
-
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot document : task.getResult()){
-                        System.out.println("");
-                        System.out.println(document.getData());
-                    }
-                }
+    private void handleResponse(DocumentSnapshot documentSnapshot, Bundle b, Intent intent) {
+        System.out.println(documentSnapshot);
+        HashMap checks = (HashMap<String, HashMap<String, Boolean>>) documentSnapshot.getData().get("checks");
+        HashMap PreInspectionCompleted = new HashMap<String, HashMap<String, Boolean>>();
+        Iterator it = checks.entrySet().iterator();
+        while(it.hasNext()){
+            HashMap innerChecks = new HashMap<String, Boolean>();
+            Map.Entry pair = (Map.Entry) it.next();
+            String new_key = pair.getKey().toString().replaceAll("_"," ");
+            HashMap<String, Boolean> inner_temp = (HashMap) pair.getValue();
+            Iterator inner = inner_temp.entrySet().iterator();
+            while(inner.hasNext()){
+                Map.Entry innerPair = (Map.Entry) inner.next();
+                String new_inner_key = innerPair.getKey().toString().replaceAll("_"," ");
+                innerChecks.put(new_inner_key, innerPair.getValue());
             }
-        });
-        System.out.println(query);
-
+            preInspectionCheckValues.put(new_key, innerChecks);
+        }
+        timestamp = b.getString("Timestamp");
+        interiorChecks = intent.getStringArrayListExtra("IntCheck");
+        exteriorChecks = intent.getStringArrayListExtra("ExtCheck");
+        engineChecks = intent.getStringArrayListExtra("EngCheck");
+        inBundle = new Bundle();
+        exBundle = new Bundle();
+        enBundle = new Bundle();
+        inBundle.putStringArrayList("InteriorChecklist", interiorChecks);
+        inBundle.putSerializable("toEdit", preInspectionCheckValues.get("Interior Checks"));
+        exBundle.putStringArrayList("ExteriorChecklist", exteriorChecks);
+        exBundle.putSerializable("toEdit", preInspectionCheckValues.get("Exterior Checks"));
+        enBundle.putStringArrayList("EngineChecklist", engineChecks);
+        enBundle.putSerializable("toEdit", preInspectionCheckValues.get("Engine Checks"));
+        engineAndFluidFragment = new EngineAndFluidFragment();
+        exteriorCheckFragment = new ExteriorChecksFragment();
+        interiorCheckFragment = new InteriorChecksFragment();
+        engineAndFluidFragment.setArguments(enBundle);
+        exteriorCheckFragment.setArguments(exBundle);
+        interiorCheckFragment.setArguments(inBundle);
     }
+
+
 
 
     private void setupViewPager(ViewPager viewPager){
