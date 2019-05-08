@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -27,6 +28,14 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
@@ -71,6 +80,10 @@ public class PreInspectionActivity extends AppCompatActivity {
     public HashMap<String, HashMap<String, Boolean>> preInspectionCheckValues;
     public HashMap<String, String> others;
 
+    private FirebaseFirestore db;
+
+    private static Boolean sent = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +96,7 @@ public class PreInspectionActivity extends AppCompatActivity {
         inspectionChecklist = new InspectionChecklist(getApplicationContext(), ACTION);
         inspectionChecklist.getPreList();
         progressDialog = ProgressDialog.show(this, "Getting Data", "Waiting for results...", true);
+        db = FirebaseFirestore.getInstance();
 
         receiver = new BroadcastReceiver()
         {
@@ -97,10 +111,12 @@ public class PreInspectionActivity extends AppCompatActivity {
                 Boolean isEdit = b.getBoolean("Edit");
                 driverName = b.getString("Driver name");
                 bus_number = b.getInt("Bus number");
+                System.out.println(bus_number);
+                System.out.println(sent);
                 if(isEdit){
                     // retrieve the pre-inspection check if edit is clicked (IMPORTANT)
                     System.out.println("Must get the edit version");
-                    getLatestPreInspectionCheck(driverName, bus_number);
+//                    getLatestPreInspectionCheck(driverName, bus_number);
                     // Will give an error right now. Need to populate the bundle to be sent to the fragments.
                 }
                 else {
@@ -124,10 +140,6 @@ public class PreInspectionActivity extends AppCompatActivity {
                     interiorCheckFragment.setArguments(inBundle);
                 }
 
-                System.out.println(driverName);
-                System.out.println(bus_number);
-                System.out.println(timestamp);
-
                 mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
                 mViewPager = findViewById(R.id.container);
@@ -148,6 +160,10 @@ public class PreInspectionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println(preInspectionCheckValues);
                 updateDatabase.sendPreInspectionCheck(preInspectionCheckValues, others, driverName, bus_number, timestamp);
+                Intent intent = new Intent();
+                intent.putExtra(DriverDashboard.SHOW_PRE_EDIT, true);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
@@ -157,6 +173,23 @@ public class PreInspectionActivity extends AppCompatActivity {
 
     private void getLatestPreInspectionCheck(String driverName, int bus_number) {
         //TODO: Use the two arguments to get the latest record of the pre-inspection check
+        System.out.println("getting latest record");
+        CollectionReference preInspRecord = db.collection("Pre Inspection Check");
+        Query query = preInspRecord.whereEqualTo("Driver Name", driverName).whereEqualTo("Bus Number", bus_number);
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        System.out.println("");
+                        System.out.println(document.getData());
+                    }
+                }
+            }
+        });
+        System.out.println(query);
+
     }
 
 

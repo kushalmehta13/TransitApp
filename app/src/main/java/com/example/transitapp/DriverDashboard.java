@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -42,6 +43,8 @@ import java.util.List;
 public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
     private Button signOut;
 
+    public static final int REQUEST_CODE_PRE_INSPECTION_ACTIVITY = 100;
+    public static final String SHOW_PRE_EDIT = "shouldShowButton";
 
     private Intent login;
     private Intent preInspectionIntent;
@@ -51,8 +54,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
     private CardView preInspection;
     private CardView postInspection;
-    private boolean preInspectionClicked = false;
-    private boolean postInspectionClicked = false;
+
     private Button editPreinspection;
     private Button editPostInspection;
 //    private Button preInspection;
@@ -78,12 +80,10 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         signOut.setOnClickListener(this);
         editPreinspection = findViewById(R.id.preInsepctionEdit);
         editPostInspection = findViewById(R.id.postInspectionEdit);
-        if(!postInspectionClicked){
-            editPostInspection.setVisibility(View.GONE);
-        }
-        if(!preInspectionClicked){
-            editPreinspection.setVisibility(View.GONE);
-        }
+
+        editPostInspection.setVisibility(View.GONE);
+        editPreinspection.setVisibility(View.GONE);
+
         preInspection.setOnClickListener(this);
         postInspection.setOnClickListener(this);
         editPreinspection.setOnClickListener(this);
@@ -106,7 +106,6 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
             });
                     break;
             case R.id.pres_inspec_card_view:
-                preInspectionClicked = true;
                 final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
                 dialog.setContentView(R.layout.busn_number_dialog);
                 dialog.setTitle("Select Bus Number");
@@ -134,8 +133,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                             b.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
                             b.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
                             preInspectionIntent.putExtra("editBundle", b);
-                            editPreinspection.setVisibility(View.VISIBLE);
-                            startActivity(preInspectionIntent);
+                            startActivityForResult(preInspectionIntent, REQUEST_CODE_PRE_INSPECTION_ACTIVITY);
                             dialog.dismiss();
                         }
                     }
@@ -144,7 +142,6 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
                     break;
             case R.id.post_inspec_card_view:
-                postInspectionClicked = true;
                 postInspectionIntent = new Intent(DriverDashboard.this, PostInspectionActivty.class);
 //                Bundle b1 = new Bundle();
 //                b1.putBoolean("Edit", false);
@@ -177,5 +174,15 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 break;
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_PRE_INSPECTION_ACTIVITY && resultCode == RESULT_OK){
+            if (data.hasExtra(SHOW_PRE_EDIT) && data.getBooleanExtra(SHOW_PRE_EDIT, false) && editPreinspection.getVisibility() != View.VISIBLE){
+                editPreinspection.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }
