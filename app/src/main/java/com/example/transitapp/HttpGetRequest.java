@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +52,42 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result){
         super.onPostExecute(result);
         // TODO: check what the result is for. Ideally, check a field for the URL and check its parameters
+        try {
+            JSONObject jsonResponseChecker = new JSONObject(result);
+            String type = (String) jsonResponseChecker.get("checkListType");
+            if (type.equals("Pre_Inspection_Check")) {
+                handlePreInspectionCheck(result);
+            } else {
+                handlePostInspectionCheck(result);
+
+            }
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        
+
+    }
+
+    private void handlePostInspectionCheck(String result) {
+        ArrayList<String> post = new ArrayList<>();
+        try{
+            JSONObject jsonResponse = new JSONObject(result);
+            JSONArray postTripChecks = (JSONArray) jsonResponse.getJSONObject("values").get("Post-Trip");
+            System.out.println(postTripChecks);
+            for(int i=0; i<postTripChecks.length(); ++i){
+                post.add((String) postTripChecks.get(i));
+            }
+
+            Intent i = new Intent(mAction);
+            i.putExtra("postCheck", post);
+            mContext.sendBroadcast(i);
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void handlePreInspectionCheck(String result) {
         HashMap<String, ArrayList> pre = new HashMap<>();
         try {
             JSONObject jsonResponse = new JSONObject(result);
@@ -84,6 +122,5 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 }

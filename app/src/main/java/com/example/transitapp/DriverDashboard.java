@@ -129,15 +129,15 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
                     break;
             case R.id.post_inspec_card_view:
+                editPostInspection.setVisibility(View.GONE);
                 postInspectionIntent = new Intent(DriverDashboard.this, PostInspectionActivty.class);
-//                Bundle b1 = new Bundle();
-//                b1.putBoolean("Edit", false);
-//                b1.putString("Driver name", user.getDisplayName());
-//                b1.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
-//                b1.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
-//                postInspectionIntent.putExtra("editBundle", b1);
+                Bundle b1 = new Bundle();
+                b1.putBoolean("Edit", false);
+                b1.putString("Driver name", user.getDisplayName());
+                b1.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
+                b1.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
+                postInspectionIntent.putExtra("editBundle", b1);
                 startActivity(postInspectionIntent);
-                editPostInspection.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.preInsepctionEdit:

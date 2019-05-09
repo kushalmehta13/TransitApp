@@ -30,7 +30,7 @@ public class InspectionChecklist {
     private HashMap<String, ArrayList> pre;
     private HashMap<String, ArrayList> post;
     private String BASE_URL_PRE = "https://us-central1-transitapp-d5956.cloudfunctions.net/api/GetInspectionCheckList?type=pre";
-    private String BASE_URL_POST = "https://us-central1-transitapp-d5956.cloudfunctions.net/GetInspectionCheckList?type=post";
+    private String BASE_URL_POST = "https://us-central1-transitapp-d5956.cloudfunctions.net/api/GetInspectionCheckList?type=post";
     public  boolean present = false;
 
     public InspectionChecklist(Context applicationContext, String ACTION){
@@ -60,6 +60,11 @@ public class InspectionChecklist {
     public void getPreList(){
         HttpGetRequest getRequest = new HttpGetRequest(c, mAction);
         getRequest.execute(BASE_URL_PRE);
+    }
+
+    public void getPostList(){
+        HttpGetRequest getRequest = new HttpGetRequest(c, mAction);
+        getRequest.execute(BASE_URL_POST);
     }
 
 }
