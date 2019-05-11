@@ -30,6 +30,12 @@
             </meta-data>
         </provider>
         <activity
+            android:name=".Enroute_Dashboard"
+            android:label="Enroute Dashboard"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <activity
             android:name=".PostInspectionActivty"
             android:label="@string/title_activity_post_inspection_activty"
             android:theme="@style/AppTheme.NoActionBar"></activity>

@@ -58,6 +58,9 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private View parent, popupView;
     private PopupWindow popupWindow;
     private FirebaseUser user;
+    private CardView startTrip;
+    private Intent enrouteIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         signOut = findViewById(R.id.signOut);
         preInspection = findViewById(R.id.pres_inspec_card_view);
         postInspection = findViewById(R.id.post_inspec_card_view);
+        startTrip = findViewById(R.id.start_trip_card_view);
 
         signOut.setOnClickListener(this);
         editPreinspection = findViewById(R.id.preInsepctionEdit);
@@ -80,7 +84,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         editPostInspection.setOnClickListener(this);
         driverName = findViewById(R.id.driver_name);
         parent = findViewById(R.id.driverDashboard);
-
+        startTrip.setOnClickListener(this);
         user = FirebaseAuth.getInstance().getCurrentUser();
         driverName.setText("Hello, " + user.getDisplayName());
     }
@@ -171,6 +175,11 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 b3.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
                 postInspectionIntent.putExtra("editBundle", b3);
                 startActivity(postInspectionIntent);
+                break;
+
+            case R.id.start_trip_card_view:
+                enrouteIntent = new Intent(DriverDashboard.this, Enroute_Dashboard.class);
+                startActivity(enrouteIntent);
                 break;
         }
 
