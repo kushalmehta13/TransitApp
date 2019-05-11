@@ -8,7 +8,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -28,7 +27,7 @@ public class PostTripFragment extends Fragment {
     private CardView card;
     private TextView label;
     private HashMap<CardView, ToggleButton> card_toggle_map;
-    private HashMap<String, Boolean> label_toggle_map;
+    private HashMap<String, Object> label_toggle_map;
     private PostInspectionActivty parentActivity;
     private HashMap<String, Boolean> toEdit;
 
@@ -92,7 +91,7 @@ public class PostTripFragment extends Fragment {
             card.addView(horizontal);
             root.addView(card);
         }
-        parentActivity.postInspectionCheckValues = label_toggle_map;
+        parentActivity.postInspectionCheckValues.put("PostTripChecks", label_toggle_map);
         handleCardClicks(card_toggle_map);
         return view;
     }
@@ -115,7 +114,7 @@ public class PostTripFragment extends Fragment {
                         label_toggle_map.put(l.split("_")[0], false);
                     }
                     System.out.println(label_toggle_map.get(l.split("_")[0]));
-                    parentActivity.postInspectionCheckValues = label_toggle_map;
+                    parentActivity.postInspectionCheckValues.put("PostTripChecks", label_toggle_map);
                 }
             });
             c.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +128,7 @@ public class PostTripFragment extends Fragment {
                         label_toggle_map.put(l.split("_")[0], false);
                     }
                     System.out.println(label_toggle_map.get(l.split("_")[0]));
-                    parentActivity.postInspectionCheckValues = label_toggle_map;
+                    parentActivity.postInspectionCheckValues.put("PostTripChecks", label_toggle_map);
                 }
             });
         }

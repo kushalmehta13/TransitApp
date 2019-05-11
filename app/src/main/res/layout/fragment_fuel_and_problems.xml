@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <ScrollView
         android:id="@+id/scroller"
@@ -10,12 +11,125 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/root"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
+            android:id="@+id/FuelCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            app:cardCornerRadius="9dp"
+            android:layout_margin="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fuel Guage - What does it read?"
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    android:layout_margin="16dp"/>
+                <EditText
+                    android:id="@+id/fuelLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="12.5"
+                    android:textAlignment="center"
+                    android:textSize="40dp"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/problemCheckerCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            app:cardCornerRadius="9dp"
+            android:layout_margin="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Does any problem circled required the vehicle to be taken out of service?"
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    android:layout_margin="16dp"/>
+                <ToggleButton
+                    android:id="@+id/problemChecker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:text=""
+                    android:textOn=""
+                    android:textOff=""
+                    android:background="@drawable/my_btn_toggle"
+                    android:layout_gravity="center"
+                    android:layout_margin="50dp"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id="@+id/supervisorCheckerCard"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hello"/>
+                android:elevation="2dp"
+                app:cardCornerRadius="9dp"
+                android:layout_margin="16dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Has a supervisor been notified of the problem?"
+                        android:textAlignment="center"
+                        android:textSize="30dp"
+                        android:layout_margin="16dp"/>
+                    <ToggleButton
+                        android:id="@+id/supervisorChecker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:text=""
+                        android:textOn=""
+                        android:textOff=""
+                        android:background="@drawable/my_btn_toggle"
+                        android:layout_gravity="center"
+                        android:layout_margin="50dp"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp"
+                app:cardCornerRadius="9dp"
+                android:layout_margin="16dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Problem Report"
+                        android:textAlignment="center"
+                        android:textSize="30dp"
+                        android:layout_margin="16dp"/>
+                    <EditText
+                        android:id="@+id/problemReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:lines="8"
+                        android:minLines="6"
+                        />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

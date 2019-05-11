@@ -12,10 +12,14 @@
             android:layout_height="match_parent"
             android:id="@+id/root"
             android:orientation="vertical">
-            <TextView
+            <Button
+                android:id="@+id/cameraTrigger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hello"/>
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:text="Click to add a picture of a defect"
+                android:layout_gravity="center"
+                android:layout_margin="50dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -70,17 +70,19 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     }
 
     private void handlePostInspectionCheck(String result) {
-        ArrayList<String> post = new ArrayList<>();
+        HashMap<String, ArrayList> post = new HashMap<>();
         try{
             JSONObject jsonResponse = new JSONObject(result);
             JSONArray postTripChecks = (JSONArray) jsonResponse.getJSONObject("values").get("Post-Trip");
             System.out.println(postTripChecks);
+            post.put("Post Trip Check", new ArrayList());
             for(int i=0; i<postTripChecks.length(); ++i){
-                post.add((String) postTripChecks.get(i));
+                post.get("Post Trip Check").add(postTripChecks.get(i));
             }
 
+
             Intent i = new Intent(mAction);
-            i.putExtra("postCheck", post);
+            i.putExtra("postCheck", post.get("Post Trip Check"));
             mContext.sendBroadcast(i);
         } catch (JSONException e){
             e.printStackTrace();

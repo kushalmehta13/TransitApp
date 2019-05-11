@@ -27,7 +27,7 @@ public class InteriorChecksFragment extends Fragment {
     private ToggleButton checkerPositve;
     private CardView card;
     private HashMap<CardView, ToggleButton> card_toggle_map;
-    private HashMap<String, Boolean> label_toggle_map;
+    private HashMap<String, Object> label_toggle_map;
     private TextView label;
     private PreInspectionActivity parentActivity;
     private HashMap<String, Boolean> toEdit;

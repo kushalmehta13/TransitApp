@@ -29,7 +29,7 @@ public class ExteriorChecksFragment extends Fragment {
     private CardView card;
     private TextView label;
     private HashMap<CardView, ToggleButton> card_toggle_map;
-    private HashMap<String, Boolean> label_toggle_map;
+    private HashMap<String, Object> label_toggle_map;
     private PreInspectionActivity parentActivity;
     private HashMap<String, Boolean> toEdit;
     @Nullable

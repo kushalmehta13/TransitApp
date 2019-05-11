@@ -55,7 +55,7 @@ public class PreInspectionActivity extends AppCompatActivity {
 
 
     private FloatingActionButton send;
-    public HashMap<String, HashMap<String, Boolean>> preInspectionCheckValues;
+    public HashMap<String, HashMap<String, Object>> preInspectionCheckValues;
     public HashMap<String, String> others;
 
     private FirebaseFirestore db;

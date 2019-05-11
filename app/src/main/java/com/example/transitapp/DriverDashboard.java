@@ -30,11 +30,16 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private Button signOut;
 
     public static final int REQUEST_CODE_PRE_INSPECTION_ACTIVITY = 100;
+    public static final int REQUEST_CODE_POST_INSPECTION_ACTIVITY = 101;
     public static final String SHOW_PRE_EDIT = "shouldShowButton";
+    public static final String SHOW_POST_EDIT = "shouldShowButton";
 
     private Intent login;
     private Intent preInspectionIntent;
     private Intent postInspectionIntent;
+
+    private static int bus_number;
+    private static String driver_name;
 
 
 
@@ -71,8 +76,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         editPreinspection.setVisibility(View.GONE);
 
         preInspection.setOnClickListener(this);
-        postInspection.setOnClickListener(this);
         editPreinspection.setOnClickListener(this);
+        editPostInspection.setOnClickListener(this);
         driverName = findViewById(R.id.driver_name);
         parent = findViewById(R.id.driverDashboard);
 
@@ -93,6 +98,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                     break;
             case R.id.pres_inspec_card_view:
                 editPreinspection.setVisibility(View.GONE);
+                editPostInspection.setVisibility(View.GONE);
                 final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
                 dialog.setContentView(R.layout.busn_number_dialog);
                 dialog.setTitle("Select Bus Number");
@@ -113,11 +119,14 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                             bus_num.setError("Bus number is required");
                         }
                         else{
+                            postInspection.setOnClickListener(DriverDashboard.this);
                             preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
+                            bus_number = Integer.parseInt(String.valueOf(bus_num.getText()));
+                            driver_name = user.getDisplayName();
                             Bundle b = new Bundle();
                             b.putBoolean("Edit", false);
-                            b.putString("Driver name", user.getDisplayName());
-                            b.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
+                            b.putString("Driver name", driver_name);
+                            b.putInt("Bus number", bus_number );
                             b.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
                             preInspectionIntent.putExtra("editBundle", b);
                             startActivityForResult(preInspectionIntent, REQUEST_CODE_PRE_INSPECTION_ACTIVITY);
@@ -131,13 +140,14 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
             case R.id.post_inspec_card_view:
                 editPostInspection.setVisibility(View.GONE);
                 postInspectionIntent = new Intent(DriverDashboard.this, PostInspectionActivty.class);
+                System.out.println(driver_name);
                 Bundle b1 = new Bundle();
                 b1.putBoolean("Edit", false);
-                b1.putString("Driver name", user.getDisplayName());
-                b1.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
+                b1.putString("Driver name", driver_name);
+                b1.putInt("Bus number", bus_number);
                 b1.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
                 postInspectionIntent.putExtra("editBundle", b1);
-                startActivity(postInspectionIntent);
+                startActivityForResult(postInspectionIntent, REQUEST_CODE_POST_INSPECTION_ACTIVITY);
                 break;
 
             case R.id.preInsepctionEdit:
@@ -152,12 +162,14 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.postInspectionEdit:
+                System.out.println("clicked");
                 postInspectionIntent = new Intent(DriverDashboard.this, PostInspectionActivty.class);
-//                Bundle b3 = new Bundle();
-//                b3.putBoolean("Edit", true);
-//                b3.putString("Driver name", user.getDisplayName());
-//                b3.putInt("Bus number", Integer.parseInt(String.valueOf(bus_num.getText())));
-//                postInspectionIntent.putExtra("editBundle", b3);
+                Bundle b3 = new Bundle();
+                b3.putBoolean("Edit", true);
+                b3.putString("Driver name", driver_name);
+                b3.putInt("Bus number", bus_number);
+                b3.putString("Timestamp", new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date()));
+                postInspectionIntent.putExtra("editBundle", b3);
                 startActivity(postInspectionIntent);
                 break;
         }
@@ -170,6 +182,11 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         if(requestCode == REQUEST_CODE_PRE_INSPECTION_ACTIVITY && resultCode == RESULT_OK){
             if (data.hasExtra(SHOW_PRE_EDIT) && data.getBooleanExtra(SHOW_PRE_EDIT, false) && editPreinspection.getVisibility() != View.VISIBLE){
                 editPreinspection.setVisibility(View.VISIBLE);
+            }
+        }
+        if(requestCode == REQUEST_CODE_POST_INSPECTION_ACTIVITY && resultCode == RESULT_OK){
+            if (data.hasExtra(SHOW_POST_EDIT) && data.getBooleanExtra(SHOW_POST_EDIT, false) && editPostInspection.getVisibility() != View.VISIBLE){
+                editPostInspection.setVisibility(View.VISIBLE);
             }
         }
     }
