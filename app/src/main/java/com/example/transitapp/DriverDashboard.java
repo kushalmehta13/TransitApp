@@ -1,6 +1,7 @@
 package com.example.transitapp;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,7 +67,10 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
 
     public static final String Key1 = "Data";
-
+    private Button beginTrip;
+    private AutoCompleteTextView routes;
+    private AutoCompleteTextView schedules;
+    public static String[] routeArray;
 
 
     @Override
@@ -126,7 +132,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 image.setImageResource(R.drawable.ic_bus_black_36dp);
                 bus_num = dialog.findViewById(R.id.bus_numbers);
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                        R.array.planets_array, R.layout.spinner_item);
+                        R.array.bus_numbers, R.layout.spinner_item);
                 adapter.setDropDownViewResource(R.layout.spinner_item);
                 bus_num.setAdapter(adapter);
                 bus_num.setHint("Bus number");
@@ -163,11 +169,50 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 // Use bounce interpolator with amplitude 0.2 and frequency 20
                 myAnim.setInterpolator(interpolator);
                 start_trip_btn_img.startAnimation(myAnim);
+                final Dialog routeScheduleSelector = new Dialog(DriverDashboard.this, R.style.Dialog);
+                routeScheduleSelector.setContentView(R.layout.bus_route_schedule);
+                routeScheduleSelector.setTitle("Select Route and Schedule");;
+                routes = routeScheduleSelector.findViewById(R.id.route);
+                schedules = routeScheduleSelector.findViewById(R.id.schedule);
 
-                Intent myIntent = new Intent(this, Enroute_Dashboard.class);
-                myIntent.putExtra(Key1,"MyPranavKey");
-                startActivity(myIntent);
+                //Try using createFromArray
+                String[] sample = new String[]{"Hello", "Hi"};
+                ArrayAdapter<String> route_adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, routeArray);
+//                ArrayAdapter<CharSequence> route_adapter = ArrayAdapter.createFromResource(this,
+//                        R.array.routes, R.layout.spinner_item);
+                ArrayAdapter<CharSequence> schedule_adapter= ArrayAdapter.createFromResource(this,
+                        R.array.schedules, R.layout.spinner_item);
+                route_adapter.setDropDownViewResource(R.layout.spinner_item);
+                schedule_adapter.setDropDownViewResource(R.layout.spinner_item);
+                routes.setAdapter(route_adapter);
+                schedules.setAdapter(schedule_adapter);
+                beginTrip = routeScheduleSelector.findViewById(R.id.beginTrip);
 
+                routes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        routes.showDropDown();
+                    }
+                });
+
+
+
+                beginTrip.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(TextUtils.isEmpty(routes.getText()) && TextUtils.isEmpty(schedules.getText())){
+                            routes.setError("Select a route");
+                            schedules.setError("Select a route and then Select a schedule");
+                        }
+                        else{
+                            Intent myIntent = new Intent(DriverDashboard.this, Enroute_Dashboard.class);
+                            myIntent.putExtra(Key1,"MyPranavKey");
+                            startActivity(myIntent);
+                            routeScheduleSelector.dismiss();
+                        }
+                    }
+                });
+                routeScheduleSelector.show();
                 break;
 
             case R.id.post_Ins_Btn:
@@ -219,6 +264,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                     finish();
                 }
             });
+
+
                 break;
 
 

@@ -16,6 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
@@ -54,12 +55,19 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         // TODO: check what the result is for. Ideally, check a field for the URL and check its parameters
         try {
             JSONObject jsonResponseChecker = new JSONObject(result);
-            String type = (String) jsonResponseChecker.get("checkListType");
-            if (type.equals("Pre_Inspection_Check")) {
-                handlePreInspectionCheck(result);
-            } else {
-                handlePostInspectionCheck(result);
-
+            if(jsonResponseChecker.has("checkListType"))
+            {
+                String type = (String) jsonResponseChecker.get("checkListType");
+                if (type.equals("Pre_Inspection_Check")) {
+                    handlePreInspectionCheck(result);
+                } else if(type.equals("Post_Inspection_Check")) {
+                    handlePostInspectionCheck(result);
+                }
+            }
+            else{
+                if(jsonResponseChecker.has("UMBC")){
+                    handleRoutes(result);
+                }
             }
         } catch (JSONException e){
             e.printStackTrace();
@@ -67,6 +75,26 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         
 
+    }
+
+    private void handleRoutes(String result) {
+        HashMap<String, Integer> routes = new HashMap<>();
+        try {
+            JSONObject jsonResponse = new JSONObject(result);
+            Iterator<String> keys = jsonResponse.keys();
+            while(keys.hasNext()){
+                String key = keys.next();
+                if(key.equals("UMBC")){
+                    continue;
+                }
+                routes.put(key, (Integer) jsonResponse.get(key));
+            }
+            Intent i = new Intent(mAction);
+            i.putExtra("Routes", routes);
+            mContext.sendBroadcast(i);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void handlePostInspectionCheck(String result) {
