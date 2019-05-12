@@ -63,7 +63,7 @@
                     android:fontFamily="@font/faster_one"
                     android:gravity="center"
                     android:lines="2"
-                    android:text="Diver Dashboard"
+                    android:text="Driver Dashboard"
                     android:textColor="#D8FFFFFF"
                     app:autoSizeMaxTextSize="80sp"
                     app:autoSizeMinTextSize="5sp"

@@ -73,6 +73,7 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
             @Override
             public void onReceive(Context context, Intent intent) {
                 stops = intent.getStringArrayListExtra("Stop_names");
+                System.out.println(stops.size());
                 locations = (HashMap<String, LatLng>) intent.getSerializableExtra("Locations");
                 tripDetailList = new ArrayList<>();
                 fragmentList = new ArrayList<>();
@@ -146,10 +147,11 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
 
     private void setupViewPager(ViewPager viewPager, ArrayList<String> stops){
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        int i = 0;
         for(String stop: stops){
             visited.add(false);
             Enroute_Stop_Fragment f =  Enroute_Stop_Fragment.newInstance(stop,0,0,0, new TripDetails());
-            fragmentList.set(stops.indexOf(stop),f);
+            fragmentList.set(i++,f);
             adapter.addFragment(f, stop);
         }
         System.out.println(fragmentList);
@@ -192,6 +194,7 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
                 myAnim.setInterpolator(interpolator1);
                 Finish_Trip.startAnimation(myAnim);
                 sendTripDetails(tripDetailList);
+                finish();
                 break;
 
 
