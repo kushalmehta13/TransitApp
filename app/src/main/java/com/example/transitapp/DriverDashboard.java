@@ -59,7 +59,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private PopupWindow popupWindow;
     private FirebaseUser user;
 
-    private Button /*preInspection, postInspection, beginInspection, */ startTrip, signOut ;
+    private Button pre_Ins_Button, post_Ins_Button, startTrip, signOut ;
     private ImageView /*pre_ins_btn_img, post_ins_btn_img,*/ start_trip_btn_img, signout_btn_img;
 
 
@@ -77,6 +77,11 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         postInspection = (CardView) findViewById(R.id.post_inspec_card_view);
         editPreinspection = (FloatingActionButton) findViewById(R.id.pre_ins_edit_btn);
         editPostInspection = (FloatingActionButton) findViewById(R.id.post_ins_edit_btn);
+        pre_Ins_Button = (Button) findViewById(R.id.pre_Ins_Btn);
+        post_Ins_Button =(Button) findViewById(R.id.post_Ins_Btn);
+
+        pre_Ins_Button.setOnClickListener(this);
+        post_Ins_Button.setOnClickListener(this);
 
         editPostInspection.hide();
         editPreinspection.hide();
@@ -100,22 +105,6 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         start_trip_btn_img = findViewById(R.id.start_imageView);
         signout_btn_img = findViewById(R.id.signout_imageView);
 
-/*        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
-        driverName.startAnimation(myAnim);
-*//*        pre_ins_btn_img.startAnimation(myAnim);*//*
-        start_trip_btn_img.startAnimation(myAnim);
-        *//*post_ins_btn_img.startAnimation(myAnim);*//*
-        signout_btn_img.startAnimation(myAnim);*/
-
-
-       /* if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // landscape
-            dashboardTextView.setText("Driver DashBoard");
-        } else {
-            // portrait
-            dashboardTextView.setText("Driver \nDashBoard");
-        }*/
-
 
     }
 
@@ -127,7 +116,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
         switch (v.getId()){
 
-            case R.id.pres_inspec_card_view:
+            case R.id.pre_Ins_Btn:
                 editPreinspection.hide();
                 editPostInspection.hide();
                 final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
@@ -181,8 +170,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
                 break;
 
-            case R.id.post_inspec_card_view:
-                editPostInspection.setVisibility(View.GONE);
+            case R.id.post_Ins_Btn:
+                editPostInspection.hide();
                 postInspectionIntent = new Intent(DriverDashboard.this, PostInspectionActivty.class);
                 System.out.println(driver_name);
                 Bundle b1 = new Bundle();

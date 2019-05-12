@@ -168,6 +168,12 @@
 
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/pre_Ins_Btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/fui_transparent" />
+
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/pre_ins_edit_btn"
                     android:layout_width="wrap_content"
@@ -319,6 +325,12 @@
                         app:autoSizeTextType="uniform" />
 
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/post_Ins_Btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/fui_transparent" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/post_ins_edit_btn"
