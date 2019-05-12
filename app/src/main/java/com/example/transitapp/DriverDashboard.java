@@ -1,18 +1,24 @@
 package com.example.transitapp;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -20,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,12 +37,15 @@ import com.google.firebase.auth.FirebaseUser;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class DriverDashboard extends AppCompatActivity implements View.OnClickListener {
 
     public static final int REQUEST_CODE_PRE_INSPECTION_ACTIVITY = 100;
     public static final int REQUEST_CODE_POST_INSPECTION_ACTIVITY = 101;
+    private String ACTION = "ACTION_FOR_INTENT_CALLBACK_SCHEDULES";
     public static final String SHOW_PRE_EDIT = "shouldShowButton";
     public static final String SHOW_POST_EDIT = "shouldShowButton";
 
@@ -45,6 +55,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
     private static int bus_number;
     private static String driver_name;
+    private String routeSelected;
+    private String scheduleSelected;
 
     private CardView preInspection;
     private CardView postInspection;
@@ -61,6 +73,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private View parent, popupView;
     private PopupWindow popupWindow;
     private FirebaseUser user;
+    ArrayList<String> schedulesArray;
 
     private Button pre_Ins_Button, post_Ins_Button, startTrip, signOut ;
     private ImageView /*pre_ins_btn_img, post_ins_btn_img,*/ start_trip_btn_img, signout_btn_img;
@@ -71,12 +84,15 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private AutoCompleteTextView routes;
     private AutoCompleteTextView schedules;
     public static String[] routeArray;
+    BroadcastReceiver scheduleReceiver;
+    private ProgressDialog progressDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_dashboard);
+
         login = new Intent(this, FirebaseUIActivity.class);
         signOut = (Button) findViewById(R.id.signOut_Btn);
         preInspection = (CardView) findViewById(R.id.pres_inspec_card_view);
@@ -111,6 +127,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         start_trip_btn_img = findViewById(R.id.start_imageView);
         signout_btn_img = findViewById(R.id.signout_imageView);
 
+        driver_name = user.getDisplayName();
 
     }
 
@@ -148,7 +165,6 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                             postInspection.setOnClickListener(DriverDashboard.this);
                             preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
                             bus_number = Integer.parseInt(String.valueOf(bus_num.getText()));
-                            driver_name = user.getDisplayName();
                             Bundle b = new Bundle();
                             b.putBoolean("Edit", false);
                             b.putString("Driver name", driver_name);
@@ -175,23 +191,58 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 routes = routeScheduleSelector.findViewById(R.id.route);
                 schedules = routeScheduleSelector.findViewById(R.id.schedule);
 
-                //Try using createFromArray
-                String[] sample = new String[]{"Hello", "Hi"};
+
                 ArrayAdapter<String> route_adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, routeArray);
 //                ArrayAdapter<CharSequence> route_adapter = ArrayAdapter.createFromResource(this,
 //                        R.array.routes, R.layout.spinner_item);
-                ArrayAdapter<CharSequence> schedule_adapter= ArrayAdapter.createFromResource(this,
-                        R.array.schedules, R.layout.spinner_item);
                 route_adapter.setDropDownViewResource(R.layout.spinner_item);
-                schedule_adapter.setDropDownViewResource(R.layout.spinner_item);
-                routes.setAdapter(route_adapter);
-                schedules.setAdapter(schedule_adapter);
-                beginTrip = routeScheduleSelector.findViewById(R.id.beginTrip);
 
+                routes.setAdapter(route_adapter);
+                beginTrip = routeScheduleSelector.findViewById(R.id.beginTrip);
+                InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 routes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         routes.showDropDown();
+
+                    }
+                });
+
+                schedules.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        schedules.showDropDown();
+                    }
+                });
+
+                schedules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        scheduleSelected = Arrays.copyOf(schedulesArray.toArray(), schedulesArray.toArray().length, String[].class)[position];
+                    }
+                });
+
+                routes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        routeSelected = routeArray[position];
+                        populateSchedules(routeArray[position]);
+
+                        progressDialog = ProgressDialog.show(DriverDashboard.this, "Getting Schedules", "Waiting for Results...", true);
+                        scheduleReceiver = new BroadcastReceiver() {
+                            @Override
+                            public void onReceive(Context context, Intent intent) {
+                                System.out.println("Received");
+                                schedulesArray = intent.getStringArrayListExtra("Schedule");
+                                ArrayAdapter<String> schedule_adapter= new ArrayAdapter<String>(DriverDashboard.this, R.layout.spinner_item, Arrays.copyOf(schedulesArray.toArray(), schedulesArray.toArray().length, String[].class));
+                                schedule_adapter.setDropDownViewResource(R.layout.spinner_item);
+                                schedules.setAdapter(schedule_adapter);
+                                progressDialog.dismiss();
+
+                            }
+                        };
+
+                        getApplicationContext().registerReceiver(scheduleReceiver, new IntentFilter(ACTION));
                     }
                 });
 
@@ -200,11 +251,16 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 beginTrip.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(TextUtils.isEmpty(routes.getText()) && TextUtils.isEmpty(schedules.getText())){
+                        if(TextUtils.isEmpty(routes.getText()) || TextUtils.isEmpty(schedules.getText())){
                             routes.setError("Select a route");
                             schedules.setError("Select a route and then Select a schedule");
                         }
                         else{
+                            Enroute_Dashboard.busNumber = bus_number;
+                            Enroute_Dashboard.driverName = driver_name;
+                            Enroute_Dashboard.route = routeSelected;
+                            Enroute_Dashboard.schedule = scheduleSelected;
+
                             Intent myIntent = new Intent(DriverDashboard.this, Enroute_Dashboard.class);
                             myIntent.putExtra(Key1,"MyPranavKey");
                             startActivity(myIntent);
@@ -275,6 +331,14 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    private void populateSchedules(String route) {
+        RouteScheduleStopRetriever routeScheduleStopRetriever = new RouteScheduleStopRetriever(getApplicationContext(), ACTION);
+        // Time hardcoded for demo purposes
+        // "930" is 9:30 AM
+        // "0" is Monday
+        routeScheduleStopRetriever.getSchedules(route, "930", "0");
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -290,4 +354,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }

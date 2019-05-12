@@ -126,7 +126,7 @@
                             android:layout_weight="10" />
 
                         <ImageButton
-                            android:id="@+id/imageButton"
+                            android:id="@+id/Entered_plus"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -162,14 +162,14 @@
                             android:layout_weight="10" />
 
                         <ImageButton
-                            android:id="@+id/imageButton2"
+                            android:id="@+id/departed_plus"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_weight="7"
                             android:background="@color/fui_transparent"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/sub_btn_img" />
+                            android:src="@drawable/add_btn_img" />
 
                         <Space
                             android:layout_width="match_parent"
@@ -360,7 +360,7 @@
                             android:layout_weight="10" />
 
                         <ImageButton
-                            android:id="@+id/imageButton3"
+                            android:id="@+id/Bike_plus"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"

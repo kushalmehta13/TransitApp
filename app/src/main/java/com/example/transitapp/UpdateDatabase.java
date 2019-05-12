@@ -158,4 +158,11 @@ public class UpdateDatabase {
                 });
             }
         }
+
+    public void sendTripDetails(ArrayList<TripDetails> tripDetailList, String route) {
+        System.out.println(tripDetailList);
+        for(TripDetails tripDetails: tripDetailList){
+            db.collection("Interim/Spring2019/Routes/"+route+"/TripDetails").add(tripDetails);
+        }
     }
+}

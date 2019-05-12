@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonObject;
+
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,8 +18,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
@@ -68,6 +73,12 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                 if(jsonResponseChecker.has("UMBC")){
                     handleRoutes(result);
                 }
+                else if(jsonResponseChecker.has("schedule")){
+                    handleSchedules(result);
+                }
+                else if(jsonResponseChecker.has("stops")){
+                    handleStops(result);
+                }
             }
         } catch (JSONException e){
             e.printStackTrace();
@@ -75,6 +86,53 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         
 
+    }
+
+    private void handleStops(String result) {
+        ArrayList<String> stopNames = new ArrayList<>();
+        HashMap<String, LatLng> stopLocation = new HashMap<>();
+        try {
+            JSONObject jsonResponse = new JSONObject(result);
+            JSONArray stops = jsonResponse.getJSONArray("stops");
+            for(int i = 0; i< stops.length(); ++i){
+                JSONObject latLng =  stops.getJSONObject(i).getJSONObject("latlng");
+
+                LatLng l = new LatLng(latLng.getDouble("_latitude"), latLng.getDouble("_longitude"));
+                stopLocation.put((String) stops.getJSONObject(i).get("stop_name"), l);
+                stopNames.add("");
+            }
+            for(int i =0; i<stops.length(); ++i){
+                String name = stops.getJSONObject(i).getString("stop_name");
+                int index = Integer.parseInt(stops.getJSONObject(i).getString("order"));
+                stopNames.set(index, name);
+            }
+
+            Intent i = new Intent(mAction);
+            i.putExtra("Stop_names", stopNames);
+            i.putExtra("Locations", stopLocation);
+            mContext.sendBroadcast(i);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void handleSchedules(String result) {
+        ArrayList<String> scheduleArray = new ArrayList<>();
+        try {
+            JSONObject jsonResponse = new JSONObject(result);
+            JSONArray schedule = jsonResponse.getJSONArray("schedule");
+            for(int i =0;i<schedule.length();++i){
+                scheduleArray.add((String) schedule.getJSONObject(i).get("time"));
+            }
+            Intent i = new Intent(mAction);
+            i.putExtra("Schedule", scheduleArray);
+            mContext.sendBroadcast(i);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleRoutes(String result) {

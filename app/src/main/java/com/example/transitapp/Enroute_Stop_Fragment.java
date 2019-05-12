@@ -3,6 +3,7 @@ package com.example.transitapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,7 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -27,35 +33,33 @@ public class Enroute_Stop_Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String stop;
 
     private OnFragmentInteractionListener mListener;
 
     private TextView stu_entered_count_TxtView, stu_departed_count_TxtView;
     private EditText stu_entered_count_EditText, stu_departed_count_EditText;
+    private TextView current_stop;
+    private int entered;
+    private int departed;
+    private int bikes_used;
+    private ImageButton entered_button;
+    private ImageButton bike_button;
+    private ImageButton departed_button;
+    public TripDetails trip_details;
 
-    public Enroute_Stop_Fragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Enroute_Stop_Fragment.
-     */
     // TODO: Rename and change types and number of parameters
-    public static Enroute_Stop_Fragment newInstance(String param1, String param2) {
+    public static Enroute_Stop_Fragment newInstance(String stop, int entered, int departed, int bike_used, TripDetails tripDetails) {
         Enroute_Stop_Fragment fragment = new Enroute_Stop_Fragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("Stop", stop);
+        args.putInt("Entered", entered);
+        args.putInt("Departed", departed);
+        args.putInt("Bikes_used", bike_used);
+        args.putSerializable("Trip_details", (Serializable) tripDetails);
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,9 +68,16 @@ public class Enroute_Stop_Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
+            stop = getArguments().getString("Stop");
+            entered = getArguments().getInt("Entered");
+            departed = getArguments().getInt("Departed");
+            bikes_used = getArguments().getInt("Bikes_used");
+            trip_details = (TripDetails) getArguments().getSerializable("Trip_details");
+            trip_details.setBus_number(Enroute_Dashboard.busNumber);
+            trip_details.setDriver_name(Enroute_Dashboard.driverName);
+            trip_details.setSchedule(Enroute_Dashboard.schedule.replace(":",""));
+            trip_details.setStop(stop);
+            trip_details.setTrip_start_time(new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date())) ;
         }
     }
 
@@ -84,6 +95,39 @@ public class Enroute_Stop_Fragment extends Fragment {
 
         stu_departed_count_EditText = (EditText) group.findViewById(R.id.stu_depart_EditText);
         stu_departed_count_TxtView = (TextView) group.findViewById(R.id.stu_depart_TextView);
+
+
+        entered_button = (ImageButton) group.findViewById(R.id.Entered_plus);
+        departed_button = (ImageButton) group.findViewById(R.id.departed_plus);
+        bike_button = (ImageButton) group.findViewById(R.id.Bike_plus);
+
+        entered_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stu_entered_count_EditText.setText(""+ ++entered);
+                trip_details.setStudents_arrived(entered);
+            }
+        });
+
+        departed_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stu_departed_count_EditText.setText(""+ ++departed);
+                trip_details.setStudents_departed(departed);
+            }
+        });
+
+        bike_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ++bikes_used;
+                trip_details.setRacks_loaded(bikes_used);
+            }
+        });
+
+
+        current_stop = (TextView) group.findViewById(R.id.curr_stop_name_textView);
+        current_stop.setText(stop);
 
         stu_entered_count_EditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -192,5 +236,11 @@ public class Enroute_Stop_Fragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 }
