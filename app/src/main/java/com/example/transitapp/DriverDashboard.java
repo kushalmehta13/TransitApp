@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -52,14 +53,14 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private Intent login;
     private Intent preInspectionIntent;
     private Intent postInspectionIntent;
-
+    private ImageView preIns_Image, postIns_Image;
     private static int bus_number;
     private static String driver_name;
     private String routeSelected;
     private String scheduleSelected;
 
-    private CardView preInspection;
-    private CardView postInspection;
+    private CardView preInspectionCV;
+    private CardView postInspectionCV;
 
     private FloatingActionButton editPreinspection;
     private FloatingActionButton editPostInspection;
@@ -76,7 +77,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     ArrayList<String> schedulesArray;
 
     private Button pre_Ins_Button, post_Ins_Button, startTrip, signOut ;
-    private ImageView /*pre_ins_btn_img, post_ins_btn_img,*/ start_trip_btn_img, signout_btn_img;
+    private ImageView start_trip_btn_img, signout_btn_img;
 
 
     public static final String Key1 = "Data";
@@ -87,7 +88,6 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     BroadcastReceiver scheduleReceiver;
     private ProgressDialog progressDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,8 +95,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
         login = new Intent(this, FirebaseUIActivity.class);
         signOut = (Button) findViewById(R.id.signOut_Btn);
-        preInspection = (CardView) findViewById(R.id.pres_inspec_card_view);
-        postInspection = (CardView) findViewById(R.id.post_inspec_card_view);
+        preInspectionCV = (CardView) findViewById(R.id.pres_inspec_card_view);
+        postInspectionCV = (CardView) findViewById(R.id.post_inspec_card_view);
         editPreinspection = (FloatingActionButton) findViewById(R.id.pre_ins_edit_btn);
         editPostInspection = (FloatingActionButton) findViewById(R.id.post_ins_edit_btn);
         pre_Ins_Button = (Button) findViewById(R.id.pre_Ins_Btn);
@@ -109,11 +109,12 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         editPreinspection.hide();
 
         startTrip = (Button) findViewById(R.id.start_trip_Btn);
+        preIns_Image = (ImageView) findViewById(R.id.pre_ins_imageView);
+        postIns_Image = (ImageView) findViewById(R.id.post_ins_imageView);
+
 
         signOut.setOnClickListener(this);
         startTrip.setOnClickListener(this);
-
-        preInspection.setOnClickListener(this);
 
         editPreinspection.setOnClickListener(this);
         editPostInspection.setOnClickListener(this);
@@ -140,6 +141,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
 
             case R.id.pre_Ins_Btn:
+                myAnim.setInterpolator(interpolator);
+                preInspectionCV.startAnimation(myAnim);
                 editPreinspection.hide();
                 editPostInspection.hide();
                 final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
@@ -162,7 +165,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                             bus_num.setError("Bus number is required");
                         }
                         else{
-                            postInspection.setOnClickListener(DriverDashboard.this);
+                            //postInspectionCV.setOnClickListener(DriverDashboard.this);
                             preInspectionIntent = new Intent(DriverDashboard.this, PreInspectionActivity.class);
                             bus_number = Integer.parseInt(String.valueOf(bus_num.getText()));
                             Bundle b = new Bundle();
@@ -273,6 +276,9 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
             case R.id.post_Ins_Btn:
                 editPostInspection.hide();
+                myAnim.setInterpolator(interpolator);
+                postInspectionCV.startAnimation(myAnim);
+
                 postInspectionIntent = new Intent(DriverDashboard.this, PostInspectionActivty.class);
                 System.out.println(driver_name);
                 Bundle b1 = new Bundle();
@@ -344,12 +350,12 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_PRE_INSPECTION_ACTIVITY && resultCode == RESULT_OK){
             if (data.hasExtra(SHOW_PRE_EDIT) && data.getBooleanExtra(SHOW_PRE_EDIT, false) && editPreinspection.getVisibility() != View.VISIBLE){
-                editPreinspection.setVisibility(View.VISIBLE);
+                editPreinspection.show();
             }
         }
         if(requestCode == REQUEST_CODE_POST_INSPECTION_ACTIVITY && resultCode == RESULT_OK){
             if (data.hasExtra(SHOW_POST_EDIT) && data.getBooleanExtra(SHOW_POST_EDIT, false) && editPostInspection.getVisibility() != View.VISIBLE){
-                editPostInspection.setVisibility(View.VISIBLE);
+                editPostInspection.show();
             }
         }
     }

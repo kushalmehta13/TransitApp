@@ -19,7 +19,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +40,7 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
     TextView Marquee_Txt, enroute_dash_TextView;
     Button Previous_Btn, Next_Btn;
     SeekBar seek_Bar;
+    ImageButton Finish_Trip;
     public static String route;
     public static String schedule;
     public static String driverName;
@@ -44,6 +49,7 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
 
     private ViewPager mViewPager;
     private TextView driverInfo;
+
 
     private BroadcastReceiver stopsReceiver;
 
@@ -98,9 +104,14 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
 
                 seek_Bar = (SeekBar) findViewById(R.id.seekBar);
                 Previous_Btn = (Button) findViewById(R.id.prev_btn);
+                Finish_Trip = (ImageButton) findViewById(R.id.finish_Trip_ImgButton);
+
                 Next_Btn = (Button) findViewById(R.id.next_btn);
                 Previous_Btn.setOnClickListener(Enroute_Dashboard.this);
+                Finish_Trip.setOnClickListener(Enroute_Dashboard.this);
+
                 Next_Btn.setOnClickListener(Enroute_Dashboard.this);
+
 
                 mViewPager = findViewById(R.id.viewPager);
                 mViewPager.setOffscreenPageLimit(stops.size()-1);
@@ -116,6 +127,8 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
                 startLocationService();
 
                 progressDialog.dismiss();
+                Finish_Trip.setVisibility(View.GONE);
+
             }
         };
 
@@ -148,10 +161,14 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
     public void onClick(View v) {
 
         int curr_VPager_Position = mViewPager.getCurrentItem();
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 1);
 
 
         switch (v.getId()){
             case R.id.prev_btn:
+                myAnim.setInterpolator(interpolator);
+                Previous_Btn.startAnimation(myAnim);
                 if(curr_VPager_Position ==0){
                     Toast.makeText(Enroute_Dashboard.this, "This is First Stop!!", Toast.LENGTH_LONG).show();
                 }else{
@@ -160,12 +177,23 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
                 break;
 
             case R.id.next_btn:
+                myAnim.setInterpolator(interpolator);
+                Next_Btn.startAnimation(myAnim);
                 if(curr_VPager_Position ==stops.size()-1){
                     Toast.makeText(Enroute_Dashboard.this, "This is Last Stop!!", Toast.LENGTH_LONG).show();
                 }else{
                     mViewPager.setCurrentItem((curr_VPager_Position+1), true);
                 }
                 break;
+
+
+            case R.id.finish_Trip_ImgButton:
+                MyBounceInterpolator interpolator1 = new MyBounceInterpolator(0.2, 20);
+                myAnim.setInterpolator(interpolator1);
+                Finish_Trip.startAnimation(myAnim);
+                sendTripDetails(tripDetailList);
+                break;
+
 
         }
 
@@ -183,13 +211,14 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
 
 
         if(curr_VPager_Position==stops.size()-1){
-            Next_Btn.setText("Finish Trip");
+            Finish_Trip.setVisibility(View.VISIBLE);
+/*            Next_Btn.setText("Last Stop!");
             Next_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     sendTripDetails(tripDetailList);
                 }
-            });
+            });*/
         }
     }
 
@@ -284,5 +313,8 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }

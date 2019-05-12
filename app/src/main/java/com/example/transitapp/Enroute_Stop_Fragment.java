@@ -11,6 +11,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,14 +41,14 @@ public class Enroute_Stop_Fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private TextView stu_entered_count_TxtView, stu_departed_count_TxtView;
-    private EditText stu_entered_count_EditText, stu_departed_count_EditText;
+    private TextView stu_entered_count_TxtView, stu_departed_count_TxtView, bike_rack_count_TextView;
+    private EditText stu_entered_count_EditText, stu_departed_count_EditText, bike_rack_count_EditText;
     private TextView current_stop;
-    private int entered;
+    private static int entered;
     private int departed;
     private int bikes_used;
     private ImageButton entered_button;
-    private ImageButton bike_button;
+    private ImageButton bike_plus_button, bike_minus_button;
     private ImageButton departed_button;
     public TripDetails trip_details;
 
@@ -91,20 +93,31 @@ public class Enroute_Stop_Fragment extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_enroute_stop, container, false);
         stu_entered_count_EditText = (EditText) group.findViewById(R.id.stu_entered_editText);
-        stu_entered_count_TxtView = (TextView) group.findViewById(R.id.stu_entered_textView);
+        stu_entered_count_TxtView = (TextView) group.findViewById(R.id.stu_entered_TextView);
+
+        bike_rack_count_EditText = (EditText) group.findViewById(R.id.bike_rack_editText);
+        bike_rack_count_TextView = (TextView) group.findViewById(R.id.bike_rack_textView);
+        bike_rack_count_EditText.setVisibility(View.GONE);
 
         stu_departed_count_EditText = (EditText) group.findViewById(R.id.stu_depart_EditText);
         stu_departed_count_TxtView = (TextView) group.findViewById(R.id.stu_depart_TextView);
 
 
-        entered_button = (ImageButton) group.findViewById(R.id.Entered_plus);
-        departed_button = (ImageButton) group.findViewById(R.id.departed_plus);
-        bike_button = (ImageButton) group.findViewById(R.id.Bike_plus);
+        entered_button = (ImageButton) group.findViewById(R.id.entered_plus_Btn);
+        departed_button = (ImageButton) group.findViewById(R.id.departed_minus_Btn);
+        bike_plus_button = (ImageButton) group.findViewById(R.id.bike_plus_Btn);
+        bike_minus_button = (ImageButton) group.findViewById(R.id.bike_minus_Btn);
+
 
         entered_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stu_entered_count_EditText.setText(""+ ++entered);
+                final Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 1);
+                myAnim.setInterpolator(interpolator);
+                entered_button.startAnimation(myAnim);
+                entered = Integer.parseInt(stu_entered_count_TxtView.getText().toString()) + 1;
+                stu_entered_count_TxtView.setText(""+entered);
                 trip_details.setStudents_arrived(entered);
             }
         });
@@ -112,15 +125,43 @@ public class Enroute_Stop_Fragment extends Fragment {
         departed_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stu_departed_count_EditText.setText(""+ ++departed);
+                final Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 1);
+                myAnim.setInterpolator(interpolator);
+                departed_button.startAnimation(myAnim);
+                departed = Integer.parseInt(stu_departed_count_TxtView.getText().toString()) + 1;
+                stu_departed_count_TxtView.setText(""+departed);
                 trip_details.setStudents_departed(departed);
             }
         });
 
-        bike_button.setOnClickListener(new View.OnClickListener() {
+        bike_plus_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ++bikes_used;
+                final Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 1);
+                myAnim.setInterpolator(interpolator);
+                bike_plus_button.startAnimation(myAnim);
+                bikes_used = Integer.parseInt(bike_rack_count_TextView.getText().toString()) + 1;
+                bike_rack_count_TextView.setText(""+bikes_used);
+                trip_details.setRacks_loaded(bikes_used);
+            }
+        });
+
+        bike_minus_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 1);
+                myAnim.setInterpolator(interpolator);
+                bike_minus_button.startAnimation(myAnim);
+                if(Integer.parseInt(bike_rack_count_TextView.getText().toString()) == 0){
+                    bikes_used = 0;
+                }else{
+                    bikes_used = Integer.parseInt(bike_rack_count_TextView.getText().toString()) - 1;
+                    bike_rack_count_TextView.setText(""+bikes_used);
+                }
+
                 trip_details.setRacks_loaded(bikes_used);
             }
         });
@@ -144,6 +185,7 @@ public class Enroute_Stop_Fragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+
 
             }
         });

@@ -26,6 +26,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +37,7 @@
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_marginBottom="8dp"
             android:layout_weight="90"
             android:visibility="visible"
@@ -48,6 +50,8 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -98,8 +102,10 @@
             android:layout_weight="100" />
 
         <LinearLayout
+            android:id="@+id/pre_LL"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="85"
             android:gravity="center"
             android:orientation="horizontal">
@@ -113,9 +119,11 @@
                 android:id="@+id/pres_inspec_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:layout_weight="25"
                 android:clickable="true"
+                android:foregroundGravity="center"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="5dp"
                 app:cardMaxElevation="10dp">
@@ -129,7 +137,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView88"
+                        android:id="@+id/pre_ins_imageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -180,6 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:clickable="true"
+                    app:elevation="10dp"
                     app:srcCompat="@android:drawable/ic_menu_edit" />
 
             </android.support.v7.widget.CardView>
@@ -261,6 +270,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="85"
             android:gravity="center"
             android:orientation="horizontal">
@@ -274,9 +284,11 @@
                 android:id="@+id/post_inspec_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:layout_weight="25"
                 android:clickable="true"
+                android:foregroundGravity="center"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="3dp"
                 app:cardMaxElevation="10dp">
@@ -287,7 +299,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView80"
+                        android:id="@+id/post_ins_imageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"

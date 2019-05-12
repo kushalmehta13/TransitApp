@@ -162,7 +162,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="100"
+            android:layout_weight="90"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -174,34 +174,65 @@
                 android:layout_gravity="center"
                 android:layout_weight="70"
                 android:animationResolution="@android:integer/config_mediumAnimTime"
-                android:progress="3"
+                android:foregroundGravity="center"
+                android:scrollbarSize="20dp"
+                android:thumb="@drawable/ic_directions_bus_gold_24dp"
                 android:visibility="visible" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="50"
+                android:layout_weight="20"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="130" />
 
                 <Button
                     android:id="@+id/prev_btn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="100"
+                    android:gravity="center"
                     android:text="Previous Stop" />
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="150" />
+                    android:layout_weight="130" />
+
+                <ImageButton
+                    android:id="@+id/finish_Trip_ImgButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="100"
+                    android:background="@color/fui_transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/finish_trip_img" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="130" />
 
                 <Button
                     android:id="@+id/next_btn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="100"
+                    android:gravity="center"
                     android:text="Next Stop" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="130" />
             </LinearLayout>
 
             <Space
