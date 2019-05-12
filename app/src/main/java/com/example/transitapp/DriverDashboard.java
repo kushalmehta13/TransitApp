@@ -50,6 +50,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private Button editPostInspection;
 //    private Button preInspection;
     private Button beginInspection;
+    private Button beginTrip;
     private RelativeLayout layout;
     private RelativeLayout mainLayout;
     private PopupWindow popUp;
@@ -110,7 +111,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 image.setImageResource(R.drawable.ic_bus_black_36dp);
                 bus_num = dialog.findViewById(R.id.bus_numbers);
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                        R.array.planets_array, R.layout.spinner_item);
+                        R.array.bus_numbers, R.layout.spinner_item);
                 adapter.setDropDownViewResource(R.layout.spinner_item);
                 bus_num.setAdapter(adapter);
                 bus_num.setHint("Bus number");
@@ -178,6 +179,23 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.start_trip_card_view:
+                final Dialog route_picker = new Dialog(DriverDashboard.this, R.style.Dialog);
+                route_picker.setContentView(R.layout.route_schedule_dialog);
+                route_picker.setTitle("Select Route and Schedule");
+                bus_num = route_picker.findViewById(R.id.route);
+                ArrayAdapter<CharSequence> routesAdapter = ArrayAdapter.createFromResource(this,
+                        R.array.bus_numbers, R.layout.spinner_item);
+                routesAdapter.setDropDownViewResource(R.layout.spinner_item);
+                bus_num.setAdapter(routesAdapter);
+                bus_num.setHint("Bus number");
+                beginTrip = route_picker.findViewById(R.id.beginTrip);
+
+
+
+
+
+
+
                 enrouteIntent = new Intent(DriverDashboard.this, Enroute_Dashboard.class);
                 startActivity(enrouteIntent);
                 break;

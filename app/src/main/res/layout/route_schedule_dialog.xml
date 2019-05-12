@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="50dp">
+
+    <ImageView
+        android:id="@+id/busIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bus_numbers"
+        android:layout_alignBottom="@+id/bus_numbers"
+        android:layout_toStartOf="@+id/bus_numbers"
+        android:layout_toLeftOf="@+id/bus_numbers"
+        android:layout_centerVertical="true" />
+    <AutoCompleteTextView
+        android:id="@+id/route"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="100dp"
+        android:inputType="text"
+        android:textSize="30dp"/>
+    <AutoCompleteTextView
+        android:id="@+id/schedule"
+        android:layout_below="@id/route"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/route"
+        android:inputType="text"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/beginTrip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/schedule"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Begin Trip"
+        android:textSize="30dp" />
+</RelativeLayout>

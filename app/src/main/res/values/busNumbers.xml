@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="planets_array">
+    <string-array name="bus_numbers">
         <!--TODO: Change items to bus numbers-->
         <item>1</item>
         <item>2</item>
