@@ -150,7 +150,6 @@
                             android:layout_weight="8">
 
                             <ImageView
-                                android:id="@+id/imageView1"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 android:src="@drawable/student_icon"
@@ -211,7 +210,6 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/textView144"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
@@ -292,7 +290,6 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/textView1004"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
@@ -374,7 +371,6 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/textView40"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
@@ -475,7 +471,6 @@
                             android:layout_weight="8">
 
                             <ImageView
-                                android:id="@+id/imageView22"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 android:src="@drawable/bicycle_icon"
