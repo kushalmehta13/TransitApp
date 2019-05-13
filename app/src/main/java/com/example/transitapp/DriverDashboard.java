@@ -200,6 +200,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 start_trip_btn_img.startAnimation(myAnim);
                 final Dialog routeScheduleSelector = new Dialog(DriverDashboard.this, R.style.Dialog);
                 routeScheduleSelector.setContentView(R.layout.bus_route_schedule);
+                routeScheduleSelector.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 //routeScheduleSelector.setTitle("Select Route and Schedule");;
                 routes = routeScheduleSelector.findViewById(R.id.route);
                 schedules = routeScheduleSelector.findViewById(R.id.schedule);
