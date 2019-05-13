@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -56,6 +57,7 @@ public class PostInspectionActivty extends AppCompatActivity {
 
     public static String sentInspectionID;
     private Bundle bodyBundle;
+    private TextView bus_num_text_View;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,6 @@ public class PostInspectionActivty extends AppCompatActivity {
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             handleResponse(documentSnapshot, b, intent);
                             progressDialog.dismiss();
-
 
                             mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -140,6 +141,9 @@ public class PostInspectionActivty extends AppCompatActivity {
                     tabLayout.setupWithViewPager(mViewPager);
 
                 }
+
+                bus_num_text_View = (TextView) findViewById(R.id.bus_num_TextView);
+                bus_num_text_View.setText("Bus Number : "+bus_number);
 
 
             }

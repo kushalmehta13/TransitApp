@@ -107,8 +107,6 @@ public class PreInspectionActivity extends AppCompatActivity {
                             mViewPager.setOffscreenPageLimit(2);
                             setupViewPager(mViewPager);
 
-
-
                             TabLayout tabLayout = findViewById(R.id.tabs);
                             tabLayout.setupWithViewPager(mViewPager);
 

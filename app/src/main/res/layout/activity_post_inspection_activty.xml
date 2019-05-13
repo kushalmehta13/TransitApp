@@ -13,19 +13,46 @@
         android:paddingTop="@dimen/appbar_padding_top"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <TextView
+            android:id="@+id/postInspection_textView"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="70sp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/app_name">
+            android:fontFamily="@font/faster_one"
+            android:gravity="center"
+            android:lines="2"
+            android:text="Post-Inspection Check"
+            android:textColor="#D8FFFFFF"
+            app:autoSizeMaxTextSize="80sp"
+            app:autoSizeMinTextSize="5sp"
+            app:autoSizeStepGranularity="5sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@+id/dashboard_tab_imgView"
+            app:layout_constraintEnd_toEndOf="@+id/dashboard_tab_imgView"
+            app:layout_constraintStart_toStartOf="@+id/dashboard_tab_imgView"
+            app:layout_constraintTop_toTopOf="@+id/dashboard_tab_imgView" />
 
-        </android.support.v7.widget.Toolbar>
 
-
+        <TextView
+            android:id="@+id/bus_num_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="70sp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/catamaran_bold"
+            android:gravity="center"
+            android:lines="2"
+            android:text="Bus Number"
+            android:textColor="#D8000000"
+            app:autoSizeMaxTextSize="80sp"
+            app:autoSizeMinTextSize="5sp"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@+id/dashboard_tab_imgView"
+            app:layout_constraintEnd_toEndOf="@+id/dashboard_tab_imgView"
+            app:layout_constraintStart_toStartOf="@+id/dashboard_tab_imgView"
+            app:layout_constraintTop_toTopOf="@+id/dashboard_tab_imgView" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"

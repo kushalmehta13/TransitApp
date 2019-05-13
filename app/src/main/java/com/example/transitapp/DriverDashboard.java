@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -61,6 +63,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
     private CardView preInspectionCV;
     private CardView postInspectionCV;
+    private CardView startCardView;
 
     private FloatingActionButton editPreinspection;
     private FloatingActionButton editPostInspection;
@@ -97,6 +100,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         signOut = (Button) findViewById(R.id.signOut_Btn);
         preInspectionCV = (CardView) findViewById(R.id.pres_inspec_card_view);
         postInspectionCV = (CardView) findViewById(R.id.post_inspec_card_view);
+        startCardView = (CardView) findViewById(R.id.start_cardView);
         editPreinspection = (FloatingActionButton) findViewById(R.id.pre_ins_edit_btn);
         editPostInspection = (FloatingActionButton) findViewById(R.id.post_ins_edit_btn);
         pre_Ins_Button = (Button) findViewById(R.id.pre_Ins_Btn);
@@ -107,6 +111,8 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
 
         editPostInspection.hide();
         editPreinspection.hide();
+        startCardView.setVisibility(View.GONE);
+        postInspectionCV.setVisibility(View.GONE);
 
         startTrip = (Button) findViewById(R.id.start_trip_Btn);
         preIns_Image = (ImageView) findViewById(R.id.pre_ins_imageView);
@@ -147,19 +153,23 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 editPostInspection.hide();
                 final Dialog dialog = new Dialog(DriverDashboard.this, R.style.Dialog);
                 dialog.setContentView(R.layout.busn_number_dialog);
-                dialog.setTitle("Select Bus Number");
-                ImageView image = dialog.findViewById(R.id.busIcon);
-                image.setImageResource(R.drawable.ic_bus_black_36dp);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //dialog.setTitle("Select Bus Number");
+                //ImageView image = dialog.findViewById(R.id.busIcon);
+                //image.setImageResource(R.drawable.ic_bus_black_36dp);
                 bus_num = dialog.findViewById(R.id.bus_numbers);
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                         R.array.bus_numbers, R.layout.spinner_item);
                 adapter.setDropDownViewResource(R.layout.spinner_item);
                 bus_num.setAdapter(adapter);
-                bus_num.setHint("Bus number");
+                //bus_num.setHint("Bus number");
                 beginInspection = dialog.findViewById(R.id.beginInspection);
                 beginInspection.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        MyBounceInterpolator interpolator1 = new MyBounceInterpolator(0.2, 10);
+                        myAnim.setInterpolator(interpolator1);
+                        beginInspection.startAnimation(myAnim);
 
                         if(TextUtils.isEmpty(bus_num.getText())){
                             bus_num.setError("Bus number is required");
@@ -350,12 +360,28 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_PRE_INSPECTION_ACTIVITY && resultCode == RESULT_OK){
             if (data.hasExtra(SHOW_PRE_EDIT) && data.getBooleanExtra(SHOW_PRE_EDIT, false) && editPreinspection.getVisibility() != View.VISIBLE){
+                final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+                myAnim.setInterpolator(interpolator);
                 editPreinspection.show();
+                editPreinspection.setAnimation(myAnim);
+                final Animation myAnim1 = AnimationUtils.loadAnimation(this, R.anim.bounce);
+                MyBounceInterpolator interpolator1 = new MyBounceInterpolator(0.2, 5);
+                myAnim1.setInterpolator(interpolator1);
+                startCardView.setVisibility(View.VISIBLE);
+                startCardView.setAnimation(myAnim1);
+                postInspectionCV.setVisibility(View.VISIBLE);
+                postInspectionCV.setAnimation(myAnim1);
+
             }
         }
         if(requestCode == REQUEST_CODE_POST_INSPECTION_ACTIVITY && resultCode == RESULT_OK){
             if (data.hasExtra(SHOW_POST_EDIT) && data.getBooleanExtra(SHOW_POST_EDIT, false) && editPostInspection.getVisibility() != View.VISIBLE){
+                final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+                myAnim.setInterpolator(interpolator);
                 editPostInspection.show();
+                editPostInspection.setAnimation(myAnim);
             }
         }
     }
