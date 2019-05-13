@@ -100,8 +100,8 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
                 enroute_dash_TextView = (TextView) findViewById(R.id.enroutedashboardtxt);
                 Marquee_Txt.setSelected(true);
 
-                String info = "Bus No : "+busNumber+" | Route: "+route;
-                String welcome = "Welcome,"+driverName;
+                String info = "Bus No : "+busNumber+" | Route : "+route;
+                String welcome = "Welcome, "+driverName;
                 Marquee_Txt.setText(info);
                 driverInfo.setText(welcome);
 /*        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
