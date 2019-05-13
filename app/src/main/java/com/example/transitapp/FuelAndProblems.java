@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,8 +87,13 @@ public class FuelAndProblems extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                fieldValues.put("Fuel Level", Float.parseFloat(fuelLevel.getText().toString()));
-                parentActivity.postInspectionCheckValues.put("FuelAndOtherProblems", fieldValues);
+                if(TextUtils.isEmpty(fuelLevel.getText())){
+                    fuelLevel.setError("Please enter the fuel level");
+                }
+                else{
+                    fieldValues.put("Fuel Level", Float.parseFloat(fuelLevel.getText().toString()));
+                    parentActivity.postInspectionCheckValues.put("FuelAndOtherProblems", fieldValues);
+                }
             }
         });
 
