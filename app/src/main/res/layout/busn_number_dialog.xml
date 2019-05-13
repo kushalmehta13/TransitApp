@@ -113,7 +113,7 @@
         android:fontFamily="@font/catamaran_bold"
         android:text="Begin Inspection"
         android:textColor="#FFB300"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

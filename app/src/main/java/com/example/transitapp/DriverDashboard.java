@@ -73,7 +73,7 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
     private RelativeLayout mainLayout;
     private PopupWindow popUp;
     private AutoCompleteTextView bus_num;
-    private TextView driverName;
+    private TextView driverName, bus_Num_Dialog;
     private View parent, popupView;
     private PopupWindow popupWindow;
     private FirebaseUser user;
@@ -200,14 +200,14 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 start_trip_btn_img.startAnimation(myAnim);
                 final Dialog routeScheduleSelector = new Dialog(DriverDashboard.this, R.style.Dialog);
                 routeScheduleSelector.setContentView(R.layout.bus_route_schedule);
-                routeScheduleSelector.setTitle("Select Route and Schedule");;
+                //routeScheduleSelector.setTitle("Select Route and Schedule");;
                 routes = routeScheduleSelector.findViewById(R.id.route);
                 schedules = routeScheduleSelector.findViewById(R.id.schedule);
+                bus_Num_Dialog = routeScheduleSelector.findViewById(R.id.bus_num_dialouge);
+                bus_Num_Dialog.setText(""+bus_number);
 
 
                 ArrayAdapter<String> route_adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, routeArray);
-//                ArrayAdapter<CharSequence> route_adapter = ArrayAdapter.createFromResource(this,
-//                        R.array.routes, R.layout.spinner_item);
                 route_adapter.setDropDownViewResource(R.layout.spinner_item);
 
                 routes.setAdapter(route_adapter);
@@ -264,6 +264,10 @@ public class DriverDashboard extends AppCompatActivity implements View.OnClickLi
                 beginTrip.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        MyBounceInterpolator interpolator1 = new MyBounceInterpolator(0.2, 10);
+                        myAnim.setInterpolator(interpolator1);
+                        beginTrip.startAnimation(myAnim);
+
                         if(TextUtils.isEmpty(routes.getText()) || TextUtils.isEmpty(schedules.getText())){
                             routes.setError("Select a route");
                             schedules.setError("Select a route and then Select a schedule");
