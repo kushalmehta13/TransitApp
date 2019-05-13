@@ -4,28 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:orientation="vertical"
+    app:layout_anchorGravity="center"
     tools:context=".Enroute_Stop_Fragment">
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:layout_weight="100" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:layout_weight="5"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="100" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_margin="20dp"
             android:layout_weight="5"
             app:cardBackgroundColor="#ABEBEBEB"
@@ -36,6 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -49,6 +58,7 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:layout_weight="100" />
 
                     <android.support.v7.widget.CardView
@@ -67,11 +77,14 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:orientation="horizontal">
 
                             <Space
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:layout_weight="10" />
 
                             <TextView
@@ -96,6 +109,7 @@
                             <Space
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:layout_weight="10" />
 
                         </LinearLayout>
@@ -104,6 +118,7 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:layout_weight="100" />
 
                 </LinearLayout>
@@ -111,6 +126,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="30"
                     android:gravity="center|center_horizontal|center_vertical"
                     android:orientation="horizontal"
@@ -127,6 +143,7 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="10" />
 
                         <ImageButton
@@ -142,11 +159,13 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="10" />
 
                         <android.support.constraint.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="8">
 
                             <ImageView
@@ -162,6 +181,7 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="10" />
 
                         <ImageButton
@@ -177,6 +197,7 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="10" />
 
                     </LinearLayout>
@@ -192,6 +213,7 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="100" />
 
                         <android.support.v7.widget.CardView
@@ -206,6 +228,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
@@ -215,7 +238,10 @@
                                     android:layout_gravity="center"
                                     android:layout_weight="100"
                                     android:background="#EDFDC502"
+                                    android:fontFamily="@font/catamaran_extrabold"
                                     android:gravity="center"
+                                    android:paddingLeft="2dp"
+                                    android:paddingRight="2dp"
                                     android:text="Students Entered"
                                     app:autoSizeMaxTextSize="100sp"
                                     app:autoSizeMinTextSize="5sp"
@@ -225,6 +251,7 @@
                                 <android.support.constraint.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
+                                    android:layout_gravity="center"
                                     android:layout_weight="30">
 
                                     <TextView
@@ -286,6 +313,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
@@ -295,7 +323,10 @@
                                     android:layout_gravity="center"
                                     android:layout_weight="100"
                                     android:background="#5F9FDB"
+                                    android:fontFamily="@font/catamaran_extrabold"
                                     android:gravity="center"
+                                    android:paddingLeft="2dp"
+                                    android:paddingRight="2dp"
                                     android:text="Bike-Rack used"
                                     android:textColor="#FFFFFF"
                                     app:autoSizeMaxTextSize="100sp"
@@ -306,6 +337,7 @@
                                 <android.support.constraint.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
+                                    android:layout_gravity="center"
                                     android:layout_weight="30">
 
                                     <TextView
@@ -376,7 +408,10 @@
                                     android:layout_gravity="center"
                                     android:layout_weight="100"
                                     android:background="#EDFDC502"
+                                    android:fontFamily="@font/catamaran_extrabold"
                                     android:gravity="center"
+                                    android:paddingLeft="2dp"
+                                    android:paddingRight="2dp"
                                     android:text="Students Departed"
                                     app:autoSizeMaxTextSize="100sp"
                                     app:autoSizeMinTextSize="5sp"
@@ -448,6 +483,7 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="10" />
 
                         <ImageButton
@@ -463,11 +499,13 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="10" />
 
                         <android.support.constraint.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="8">
 
                             <ImageView
@@ -483,6 +521,7 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="10" />
 
                         <ImageButton
@@ -498,6 +537,7 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_weight="10" />
 
                     </LinearLayout>
@@ -511,6 +551,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="100" />
 
     </LinearLayout>
@@ -518,6 +559,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:layout_weight="100"
         android:background="@color/fui_transparent" />
 

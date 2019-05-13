@@ -24,6 +24,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
         View.OnClickListener, ViewPager.OnPageChangeListener, SeekBar.OnSeekBarChangeListener, LocationListener {
 
     TextView Marquee_Txt, enroute_dash_TextView;
-    Button Previous_Btn, Next_Btn;
+    ImageButton Previous_Btn, Next_Btn;
     SeekBar seek_Bar;
     ImageButton Finish_Trip;
     public static String route;
@@ -48,7 +49,7 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
     private String ACTION = "ACTION_FOR_INTENT_CALLBACK_STOPS";
 
     private ViewPager mViewPager;
-    private TextView driverInfo;
+    private TextView driverInfo, Loading_msg;
 
 
     private BroadcastReceiver stopsReceiver;
@@ -61,11 +62,20 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
     public static ArrayList<TripDetails> tripDetailList;
     private ArrayList<Enroute_Stop_Fragment> fragmentList;
     private int index;
+    private ProgressBar progress_Bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enroute__dashboard);
+        Finish_Trip = (ImageButton) findViewById(R.id.finish_Trip_ImgButton);
+        Finish_Trip.setOnClickListener(Enroute_Dashboard.this);
+        Loading_msg = (TextView) findViewById(R.id.loading_msg_txtView);
+        progress_Bar = (ProgressBar) findViewById(R.id.progressBar);
+        //Loading_msg.setVisibility(View.GONE);
+        Finish_Trip.setVisibility(View.INVISIBLE);
+
+
         RouteScheduleStopRetriever routeScheduleStopRetriever = new RouteScheduleStopRetriever(getApplicationContext(), ACTION);
         routeScheduleStopRetriever.getStops(route);
         progressDialog = ProgressDialog.show(this, "Getting Stops", "Waiting for data...", true);
@@ -104,12 +114,10 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
 
 
                 seek_Bar = (SeekBar) findViewById(R.id.seekBar);
-                Previous_Btn = (Button) findViewById(R.id.prev_btn);
-                Finish_Trip = (ImageButton) findViewById(R.id.finish_Trip_ImgButton);
+                Previous_Btn = (ImageButton) findViewById(R.id.prev_btn);
 
-                Next_Btn = (Button) findViewById(R.id.next_btn);
+                Next_Btn = (ImageButton) findViewById(R.id.next_btn);
                 Previous_Btn.setOnClickListener(Enroute_Dashboard.this);
-                Finish_Trip.setOnClickListener(Enroute_Dashboard.this);
 
                 Next_Btn.setOnClickListener(Enroute_Dashboard.this);
 
@@ -128,7 +136,8 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
                 startLocationService();
 
                 progressDialog.dismiss();
-                Finish_Trip.setVisibility(View.GONE);
+                Loading_msg.setVisibility(View.GONE);
+                progress_Bar.setVisibility(View.GONE);
 
             }
         };
@@ -214,7 +223,12 @@ public class Enroute_Dashboard extends AppCompatActivity implements Enroute_Stop
 
 
         if(curr_VPager_Position==stops.size()-1){
+            final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+            MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+            myAnim.setInterpolator(interpolator);
             Finish_Trip.setVisibility(View.VISIBLE);
+            Finish_Trip.startAnimation(myAnim);
+
 /*            Next_Btn.setText("Last Stop!");
             Next_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
